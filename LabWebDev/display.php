@@ -4,43 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Output</title>
-    <style>
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .info-display {
-            background-color: white;
-            padding: 20px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        .back-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-        }
-        .back-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="https://marksenpai20.github.io/bootstrap-mj-studio/prefinalsdisplay.css">
+   
 </head>
 <body>
     <div class="container">
