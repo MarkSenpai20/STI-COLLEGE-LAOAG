@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Battle Slot RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+      body {
+        font-family: "Press Start 2P", cursive;
+        background-color: #0f0f0f;
+        overflow: hidden;
+        touch-action: none;
+        user-select: none;
+        color: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* --- UI STYLES --- */
+      .pixel-box {
+        background: #374151;
+        border-top: 4px solid #9ca3af;
+        border-left: 4px solid #9ca3af;
+        border-right: 4px solid #111827;
+        border-bottom: 4px solid #111827;
+        image-rendering: pixelated;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .pixel-btn {
+        background: #d97706;
+        border-top: 4px solid #fbbf24;
+        border-left: 4px solid #fbbf24;
+        border-right: 4px solid #78350f;
+        border-bottom: 4px solid #78350f;
+        color: white;
+        cursor: pointer;
+        text-shadow: 1px 1px 0 #000;
+        position: relative;
+      }
+      .pixel-btn:active {
+        top: 2px;
+        border-top-width: 0;
+        border-left-width: 0;
+        border-right-width: 4px;
+        border-bottom-width: 0;
+      }
+      .pixel-btn:disabled {
+        background: #555;
+        border-color: #777;
+        color: #aaa;
+        cursor: not-allowed;
+        top: 0;
+      }
+
+      .btn-spin {
+        background: #16a34a;
+        border-color: #4ade80 #14532d #14532d #4ade80;
+        border-width: 4px;
+      }
+      .btn-spin:active {
+        background: #15803d;
+      }
+      .btn-spin:disabled {
+        background: #555;
+        border-color: #777;
+        cursor: not-allowed;
+      }
+
+      .btn-bonus {
+        background: #7e22ce;
+        border-color: #c084fc #3b0764 #3b0764 #c084fc;
+        border-width: 4px;
+      }
+
+      .bonus-active {
+        background: #db2777 !important;
+        animation: pulse 0.5s infinite alternate;
+      }
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.05);
+        }
+      }
+
+      .float-text {
+        position: absolute;
+        font-weight: bold;
+        font-size: 18px;
+        -webkit-text-stroke: 1px black;
+        pointer-events: none;
+        z-index: 50;
+        animation: floatUp 1.5s forwards;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(0.5);
+          opacity: 0;
+        }
+        20% {
+          transform: translateY(-20px) scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-80px) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Stage Clear / Death Overlays */
+      .overlay-text {
+        text-shadow: 4px 4px 0 #000;
+        -webkit-text-stroke: 2px black;
+      }
+
+      /* Form Elements */
+      input,
+      select {
+        font-family: sans-serif;
+        outline: none;
+        border-radius: 0;
+      }
+      select {
+        -webkit-appearance: none;
+        text-align-last: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. AUTH MODAL -->
+    <div
+      id="auth-modal"
+      class="fixed inset-0 bg-black bg-opacity-95 z-[90] flex items-center justify-center"
+    >
+      <div class="pixel-box p-6 w-80 text-center flex flex-col gap-4">
+        <h2 class="text-yellow-400 text-lg underline">HERO LOGIN</h2>
+        <div class="flex flex-col gap-2 text-left">
+          <label class="text-[10px] text-gray-300">USERNAME</label>
+          <input
+            type="text"
+            id="auth-user"
+            class="w-full p-2 text-black text-sm border-2 border-gray-500 bg-gray-100"
+          />
+        </div>
+        <div class="flex flex-col gap-2 text-left">
+          <label class="text-[10px] text-gray-300">PASSWORD</label>
+          <input
+            type="password"
+            id="auth-pass"
+            class="w-full p-2 text-black text-sm border-2 border-gray-500 bg-gray-100"
+          />
+        </div>
+
+        <!-- REMOVED API KEY FROM HERE -->
+
+        <div class="flex gap-2 mt-2">
+          <button onclick="handleLogin()" class="pixel-btn w-1/2 py-3 text-xs">
+            LOGIN
+          </button>
+          <button
+            onclick="handleRegister()"
+            class="pixel-btn w-1/2 py-3 bg-blue-600 border-blue-400 text-xs"
+          >
+            REGISTER
+          </button>
+        </div>
+        <div id="auth-msg" class="text-red-500 text-[10px] h-4"></div>
+      </div>
+    </div>
+
+    <!-- 2. GAME CONTAINER -->
+    <div
+      id="game-wrapper"
+      class="hidden fixed inset-0 w-full h-full bg-[#1a1a1a]"
+    >
+      <canvas id="gameCanvas" class="block w-full h-full"></canvas>
+
+      <!-- STAGE CLEAR OVERLAY -->
+      <div
+        id="stage-clear-overlay"
+        class="hidden absolute inset-0 flex items-center justify-center z-40 bg-black bg-opacity-70 pointer-events-none"
+      >
+        <h1
+          class="overlay-text text-5xl text-yellow-400 font-bold animate-bounce text-center leading-tight"
+        >
+          STAGE<br />CLEARED!
+        </h1>
+      </div>
+
+      <!-- GAME OVER OVERLAY -->
+      <div
+        id="game-over-overlay"
+        class="hidden absolute inset-0 flex flex-col items-center justify-center z-50 bg-red-900 bg-opacity-90"
+      >
+        <h1 class="overlay-text text-5xl text-white font-bold mb-4">
+          YOU DIED
+        </h1>
+        <p class="text-yellow-200 text-xs mb-6">Stage Progress Reset</p>
+        <button
+          onclick="revivePlayer()"
+          class="pixel-btn px-6 py-4 text-sm animate-pulse"
+        >
+          TRY AGAIN
+        </button>
+      </div>
+
+      <!-- ✨ GEMINI BOSS ENCOUNTER MODAL ✨ -->
+      <div
+        id="boss-modal"
+        class="hidden absolute inset-0 flex flex-col items-center justify-center z-50 bg-black bg-opacity-90 pointer-events-auto"
+      >
+        <h1
+          class="overlay-text text-5xl text-purple-400 font-bold mb-6 animate-pulse"
+        >
+          BOSS INCOMING
+        </h1>
+        <div class="pixel-box w-96 p-4 bg-gray-800 border-purple-500">
+          <div
+            id="boss-info"
+            class="text-center text-yellow-200 h-24 flex items-center justify-center text-sm leading-relaxed"
+          >
+            ✨ Generating foe...
+          </div>
+          <button
+            id="boss-continue-btn"
+            onclick="closeBossModal()"
+            class="pixel-btn w-full py-3 text-sm bg-purple-600 border-purple-400 mt-4"
+          >
+            CONTINUE
+          </button>
+        </div>
+      </div>
+
+      <!-- ✨ API ERROR MODAL ✨ -->
+      <div
+        id="api-error-modal"
+        class="hidden absolute inset-0 flex flex-col items-center justify-center z-[100] bg-black bg-opacity-90 pointer-events-auto"
+      >
+        <div class="pixel-box w-96 p-4 bg-gray-800 border-red-500">
+          <h1
+            class="overlay-text text-3xl text-red-400 font-bold mb-6 text-center"
+          >
+            API ERROR
+          </h1>
+          <div
+            id="api-error-info"
+            class="text-center text-yellow-200 h-24 flex items-center justify-center text-sm leading-relaxed"
+          >
+            Gemini API Key is missing or invalid. Please add your key to
+            index.html to enable AI features.
+          </div>
+          <button
+            onclick="toggleModal('api-error-modal', false)"
+            class="pixel-btn w-full py-3 text-sm bg-red-600 border-red-400 mt-4"
+          >
+            CLOSE
+          </button>
+        </div>
+      </div>
+
+      <!-- ✨ SPEECH BUBBLE -->
+      <div
+        id="speech-bubble"
+        class="hidden absolute w-48 p-2 pixel-box bg-white text-black text-xs z-30 pointer-events-none"
+        style="border-radius: 10px; border: 2px solid #111"
+      >
+        <span id="speech-text">...</span>
+        <!-- speech bubble tail -->
+        <div
+          style="
+            position: absolute;
+            bottom: -12px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 12px solid white;
+          "
+        ></div>
+      </div>
+
+      <!-- ✨ TAUNT BUTTON -->
+      <div
+        id="taunt-btn-container"
+        class="absolute pointer-events-auto z-10"
+        style="left: 10px; top: 100px"
+      >
+        <button
+          id="taunt-btn"
+          onclick="handleTaunt()"
+          class="pixel-btn px-2 py-1 text-[10px] bg-blue-600 border-blue-400"
+        >
+          ✨ TAUNT
+        </button>
+      </div>
+
+      <!-- UI OVERLAY -->
+      <div
+        id="ui-layer"
+        class="absolute inset-0 pointer-events-none flex flex-col justify-between p-2"
+      >
+        <!-- HEADER -->
+        <div class="flex justify-between items-start pointer-events-auto h-12">
+          <div
+            class="pixel-box px-3 py-2 text-[10px] flex flex-col gap-1 shadow-lg"
+          >
+            <span id="ui-loc" class="text-yellow-200">Spring Fields</span>
+            <span id="ui-stage" class="text-white">Stage 1</span>
+          </div>
+          <div class="flex gap-2">
+            <button
+              onclick="toggleModal('lb-modal')"
+              class="pixel-btn px-2 py-2 text-[10px]"
+            >
+              🏆 RANK
+            </button>
+            <button
+              onclick="toggleModal('admin-modal')"
+              id="admin-btn"
+              class="hidden pixel-btn px-2 py-2 text-[10px] bg-red-600"
+            >
+              ADMIN
+            </button>
+            <button
+              onclick="logout()"
+              class="pixel-btn px-2 py-2 text-[10px] bg-gray-500"
+            >
+              EXIT
+            </button>
+          </div>
+        </div>
+
+        <!-- MODALS -->
+        <div
+          id="lb-modal"
+          class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center pointer-events-auto"
+        >
+          <div class="pixel-box w-80 p-4">
+            <h3 class="text-center mb-2 text-yellow-400 underline">
+              LEADERBOARD
+            </h3>
+            <div
+              id="lb-list"
+              class="bg-white text-black font-sans text-xs h-48 overflow-y-auto p-2 mb-2 border-2 border-black"
+            >
+              Loading...
+            </div>
+            <button
+              onclick="toggleModal('lb-modal')"
+              class="pixel-btn w-full py-2"
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="admin-modal"
+          class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center pointer-events-auto"
+        >
+          <div class="pixel-box w-72 p-4">
+            <h3 class="text-center mb-2 text-red-400 underline">ADMIN PANEL</h3>
+            <div
+              id="admin-list"
+              class="bg-white text-black font-sans text-xs h-40 overflow-y-auto p-2 mb-2 border-2 border-black"
+            ></div>
+            <button
+              onclick="toggleModal('admin-modal')"
+              class="pixel-btn w-full py-2"
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
+
+        <!-- FOOTER (CONTROLS) -->
+        <div
+          id="footer-controls"
+          class="pointer-events-auto w-full max-w-3xl mx-auto flex flex-col gap-2 mb-1 pb-2"
+        >
+          <!-- STATUS -->
+          <div
+            class="flex justify-between px-2 text-xs font-bold tracking-wider z-10"
+          >
+            <div class="text-yellow-400 drop-shadow-md flex items-center gap-2">
+              💰 <span id="ui-wallet">500</span>
+            </div>
+            <div class="text-green-400 drop-shadow-md">
+              WIN: <span id="ui-win">0</span>
+            </div>
+          </div>
+
+          <!-- BONUS ALERT -->
+          <div
+            id="ui-bonus-msg"
+            class="hidden text-center text-pink-400 text-xs font-bold animate-bounce bg-black bg-opacity-80 border border-pink-500 p-2 rounded z-10 mb-1"
+          >
+            BONUS MODE: <span id="ui-bonus-spins">0</span> SPINS LEFT<br />
+            <span class="text-[8px] text-white"
+              >AUTO-SPIN ACTIVE • NO SKULLS • HIGH HEAL</span
+            >
+          </div>
+
+          <!-- CONTROLS -->
+          <div
+            class="pixel-box p-2 flex items-center justify-between gap-2 relative z-10 bg-[#374151]"
+          >
+            <div class="flex flex-col items-center w-1/3 gap-1">
+              <div class="text-[8px] text-gray-400">BET AMOUNT</div>
+              <div class="flex items-center w-full justify-center gap-1">
+                <button
+                  onclick="changeBetIndex(-1)"
+                  class="pixel-btn w-6 h-6 text-xs flex items-center justify-center"
+                >
+                  -
+                </button>
+                <select
+                  id="bet-select"
+                  onchange="selectBet()"
+                  class="bg-black text-white text-[10px] w-16 h-6 border border-gray-500 text-center"
+                ></select>
+                <button
+                  onclick="changeBetIndex(1)"
+                  class="pixel-btn w-6 h-6 text-xs flex items-center justify-center"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="flex-1 flex justify-center relative -top-4">
+              <button
+                id="spin-btn"
+                onclick="manualSpin()"
+                class="btn-spin rounded-full w-20 h-20 flex items-center justify-center text-sm font-bold shadow-xl z-10 transform active:scale-95 transition-transform"
+              >
+                SPIN
+              </button>
+            </div>
+
+            <div class="w-1/3 flex justify-end h-full">
+              <button
+                id="buy-bonus-btn"
+                onclick="buyBonus()"
+                class="btn-bonus w-full py-1 flex flex-col items-center justify-center px-1 text-[8px] leading-tight h-10 shadow-md active:top-1 relative"
+              >
+                <span>BUY BONUS</span>
+                <span id="bonus-cost" class="text-yellow-300 mt-0.5">500</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center z-10">
+            <button
+              onclick="requestCoins()"
+              class="text-[9px] text-gray-500 hover:text-white underline"
+            >
+              Request Coin Refill
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* --- CONSTANTS --- */
+      // --- PHP Connection ---
+      // Set to true when you have api.php running on a server
+      const USE_PHP_BACKEND = true;
+      const API_URL = "http://localhost/api.php"; // Change this to your server's URL
+      // --------------------
+
+      const CONSTANTS = {
+        COLS: 4,
+        ROWS: 3,
+        TILE_SIZE: 80,
+        BONUS_COST_MULT: 50,
+        REEL_DELAY: 200,
+        CASCADE_SPEED: 5, // SLOWER SPEED for heavy feel
+      };
+
+      const BET_STEPS = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15, 18, 20, 25, 30, 35, 40, 50, 60,
+        70, 80, 90, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000,
+        1500,
+      ];
+      const SYMBOLS = {
+        WILD: 0,
+        SWORD: 1,
+        POTION: 2,
+        SHIELD: 3,
+        SKULL: 4,
+        C_S: 5,
+        C_M: 6,
+        C_L: 7,
+        SCATTER: 8,
+      };
+      const COLORS = [
+        "#d946ef",
+        "#3b82f6",
+        "#ef4444",
+        "#64748b",
+        "#111",
+        "#facc15",
+        "#eab308",
+        "#ca8a04",
+        "#9333ea",
+      ];
+      const ASSET_TXT = [
+        "WILD",
+        "⚔️",
+        "❤️",
+        "🛡️",
+        "💀",
+        "¢S",
+        "¢M",
+        "¢L",
+        "SCAT",
+      ];
+
+      /* --- STATE --- */
+      let state = {
+        user: null, // Will store {username, coins, stage, isAdmin, enemyHP, totalDamage, highestCombo}
+        wallet: 500,
+        betIndex: 9,
+        grid: [],
+        matches: [],
+        spinning: false,
+        bonusActive: false,
+        autoSpin: false,
+        bonusSpins: 0,
+        stage: 1,
+        hp: 100,
+        maxHp: 100,
+        enemyHp: 100,
+        enemyMaxHp: 100,
+        shieldHp: 0,
+        shieldRounds: 0,
+        particles: [],
+        reelOffsets: [0, 0, 0, 0],
+        reelMoving: [false, false, false, false],
+        cascadeOffsets: [],
+        paused: false,
+        dead: false,
+        enemyName: null, // ✨ Store the boss/enemy name
+        currentSpinWin: 0, // <-- FIX
+        currentCombo: 0, // <-- FIX
+        totalDamage: 0, // <-- FIX
+        highestCombo: 0, // <-- FIX
+      };
+
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      let assets = {};
+      let gameLoopRunning = false;
+      let lastDrawTime = 0; // <-- FIX for black screen
+
+      // --- Animation System ---
+      const playerAnims = {
+        idle: { img: "Idle.png", frames: 4, speed: 250, frameW: 32 },
+        walk: { img: "Walk.png", frames: 4, speed: 150, frameW: 32 },
+        roll: { img: "Roll.png", frames: 10, speed: 70, frameW: 32 },
+        throw: { img: "Throw.png", frames: 3, speed: 150, frameW: 32 },
+        jab: { img: "LeftJab.png", frames: 1, speed: 100, frameW: 32 },
+        hook: { img: "RightHook.png", frames: 5, speed: 90, frameW: 32 },
+        combo: { img: "RightLeftCombo.png", frames: 6, speed: 90, frameW: 32 },
+        hit: { img: "HitDeath.png", frames: 2, speed: 100, frameW: 32 }, // Using first 2 frames for hit
+        death: { img: "HitDeath.png", frames: 9, speed: 150, frameW: 32 },
+        taunt: { img: "Blink.png", frames: 2, speed: 200, frameW: 32 }, // ✨ NEW
+      };
+      let playerAnimData = {}; // Stores loaded Image() objects
+      let playerState = {
+        name: "idle",
+        frame: 0,
+        lastTime: 0,
+        loop: true,
+        onComplete: null,
+        x: 0,
+        y: 0,
+        targetX: 0,
+        startX: 0, // <-- FIX
+      };
+
+      window.onload = () => {
+        loadAssets();
+        initBettingUI();
+      };
+
+      function loadAssets() {
+        // 1. Load Slot Symbols
+        for (let i = 0; i < 9; i++) {
+          const c = document.createElement("canvas");
+          c.width = 64;
+          c.height = 64;
+          const x = c.getContext("2d");
+          x.fillStyle = COLORS[i];
+          x.shadowBlur = 0;
+          if (i === SYMBOLS.SKULL || i === SYMBOLS.C_L || i === SYMBOLS.WILD) {
+            x.fillRect(4, 4, 56, 56);
+            x.lineWidth = 2;
+            x.strokeStyle = "white";
+            x.strokeRect(4, 4, 56, 56);
+          } else {
+            x.beginPath();
+            x.arc(32, 32, 28, 0, 6.28);
+            x.fill();
+            x.lineWidth = 2;
+            x.strokeStyle = "white";
+            x.stroke();
+          }
+          x.fillStyle = "white";
+          x.font = "bold 24px sans-serif";
+          x.textAlign = "center";
+          x.textBaseline = "middle";
+          x.shadowColor = "black";
+          x.shadowBlur = 4;
+          x.fillText(ASSET_TXT[i], 32, 34);
+          assets[i] = c;
+        }
+
+        // 2. Load Player Spritesheets
+        let loaded = 0;
+        const total = Object.keys(playerAnims).length;
+        for (let key in playerAnims) {
+          const anim = playerAnims[key];
+          const img = new Image();
+          img.src = anim.img; // Assumes files are in the same folder
+          img.onload = () => {
+            loaded++;
+            if (loaded === total) {
+              // All sprites loaded
+            }
+          };
+          img.onerror = (e) => {
+            console.error(
+              `Failed to load sprite: ${anim.img}. Full path attempted: ${img.src}. Make sure the file is in the same folder as index.html.`,
+              e
+            );
+          };
+          playerAnimData[key] = img;
+        }
+      }
+
+      function initBettingUI() {
+        const sel = document.getElementById("bet-select");
+        sel.innerHTML = "";
+        BET_STEPS.forEach((val, idx) => {
+          let opt = document.createElement("option");
+          opt.value = idx;
+          opt.innerText = val;
+          if (val === 10) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        updateBetUI();
+      }
+
+      /* --- AUTH --- */
+      async function apiCall(action, data) {
+        if (!USE_PHP_BACKEND) return; // Do nothing if PHP is disabled
+        try {
+          const response = await fetch(`${API_URL}?action=${action}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          if (!response.ok) throw new Error("Network response was not ok");
+          return await response.json();
+        } catch (error) {
+          console.error("API Call Error:", error);
+          document.getElementById("auth-msg").innerText =
+            "Server connection failed.";
+          return null; // Return null on failure
+        }
+      }
+
+      async function handleLogin() {
+        const user = document.getElementById("auth-user").value;
+        const pass = document.getElementById("auth-pass").value;
+        const msgEl = document.getElementById("auth-msg");
+
+        if (!user || !pass) return (msgEl.innerText = "All fields required.");
+
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("login", {
+            username: user,
+            password: pass,
+          });
+          if (res && res.success) {
+            state.user = res.user; // {username, coins, stage, isAdmin, enemyHP, totalDamage, highestCombo}
+            startGame();
+          } else {
+            msgEl.innerText = res ? res.message : "Login failed.";
+          }
+        } else {
+          // LocalStorage Fallback
+          let db = JSON.parse(localStorage.getItem("bs_users") || "{}");
+          if (db[user]) {
+            state.user = db[user];
+            startGame();
+          } else {
+            msgEl.innerText = "User not found (Local).";
+          }
+        }
+      }
+
+      async function handleRegister() {
+        const user = document.getElementById("auth-user").value;
+        const pass = document.getElementById("auth-pass").value;
+        const msgEl = document.getElementById("auth-msg");
+
+        if (!user || !pass) return (msgEl.innerText = "All fields required.");
+
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("register", {
+            username: user,
+            password: pass,
+          });
+          if (res && res.success) {
+            msgEl.innerText = "Success! Please log in.";
+          } else {
+            msgEl.innerText = res ? res.message : "Registration failed.";
+          }
+        } else {
+          // LocalStorage Fallback
+          let db = JSON.parse(localStorage.getItem("bs_users") || "{}");
+          if (db[user]) {
+            msgEl.innerText = "Username taken (Local).";
+          } else {
+            db[user] = {
+              username: user,
+              coins: 500,
+              stage: 1,
+              isAdmin: user === "admin",
+              enemyHP: -1, // <-- FIX
+              totalDamage: 0, // <-- FIX
+              highestCombo: 0, // <-- FIX
+            };
+            localStorage.setItem("bs_users", JSON.stringify(db));
+            msgEl.innerText = "Success! Please log in.";
+          }
+        }
+      }
+
+      function startGame() {
+        document.getElementById("auth-modal").style.display = "none";
+        document.getElementById("game-wrapper").classList.remove("hidden");
+
+        if (state.user.isAdmin) {
+          document.getElementById("admin-btn").classList.remove("hidden");
+        }
+
+        // --- LOAD USER DATA ---
+        state.wallet = state.user.coins || 500;
+        state.stage = state.user.stage || 1;
+        state.enemyMaxHp = 100 + state.stage * 25;
+        // <-- FIX: Load saved enemy HP or set to max
+        state.enemyHp =
+          state.user.enemyHP && state.user.enemyHP > 0
+            ? state.user.enemyHP
+            : state.enemyMaxHp;
+        state.totalDamage = state.user.totalDamage || 0; // <-- FIX
+        state.highestCombo = state.user.highestCombo || 0; // <-- FIX
+        // -----------------------
+
+        state.enemyName = "GRUNT"; // Initial name
+
+        // Initialize 2D cascade offsets
+        state.cascadeOffsets = create2DArray(0);
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          state.grid[c] = [];
+          for (let r = 0; r < CONSTANTS.ROWS; r++)
+            state.grid[c][r] = getRandomSym();
+        }
+
+        // --- FIX for Black Screen ---
+        // 1. Resize canvas first
+        resize();
+        window.addEventListener("resize", resize);
+
+        // 2. Set player position AFTER resize
+        playerState.startX = canvas.width / 2 - 150;
+        playerState.targetX = playerState.startX;
+
+        // 3. Start game loop
+        updateUI();
+        if (!gameLoopRunning) {
+          gameLoopRunning = true;
+          setPlayerAnim("idle");
+          // 4. Force first draw
+          draw();
+          lastDrawTime = performance.now();
+          requestAnimationFrame(gameLoop);
+        }
+      }
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        CONSTANTS.OFFSET_X =
+          (canvas.width - CONSTANTS.COLS * CONSTANTS.TILE_SIZE) / 2;
+
+        // RESPONSIVE LAYOUT
+        const footerH = 180;
+        const slotH = CONSTANTS.ROWS * CONSTANTS.TILE_SIZE;
+        const padding = 20;
+
+        let targetY = canvas.height - footerH - slotH - padding;
+        if (targetY < 180) targetY = 180;
+
+        CONSTANTS.OFFSET_Y = targetY;
+
+        // <-- FIX: Re-set player base position on resize
+        if (gameLoopRunning) {
+          playerState.startX = canvas.width / 2 - 150;
+          playerState.targetX = playerState.startX;
+        }
+      }
+
+      /* --- GAME LOGIC --- */
+      function getRandomSym() {
+        const r = Math.random();
+        if (state.bonusActive) {
+          if (r < 0.01) return SYMBOLS.SCATTER;
+          if (r < 0.06) return SYMBOLS.WILD;
+          if (r < 0.25) return SYMBOLS.POTION;
+          if (r < 0.45) return SYMBOLS.SWORD;
+          if (r < 0.6) return SYMBOLS.SHIELD;
+          return Math.floor(Math.random() * 3) + 5;
+        }
+        if (r < 0.01) return SYMBOLS.SCATTER;
+        if (r < 0.02) return SYMBOLS.WILD;
+        if (r < 0.18) return SYMBOLS.SKULL;
+        if (r < 0.33) return SYMBOLS.SWORD;
+        if (r < 0.45) return SYMBOLS.POTION;
+        if (r < 0.6) return SYMBOLS.SHIELD;
+        return Math.floor(Math.random() * 3) + 5;
+      }
+
+      function getBetAmount() {
+        return BET_STEPS[state.betIndex];
+      }
+      function changeBetIndex(d) {
+        let n = state.betIndex + d;
+        if (n >= 0 && n < BET_STEPS.length) {
+          state.betIndex = n;
+          document.getElementById("bet-select").value = n;
+          updateBetUI();
+        }
+      }
+      function selectBet() {
+        state.betIndex = parseInt(document.getElementById("bet-select").value);
+        updateBetUI();
+      }
+      function updateBetUI() {
+        document.getElementById("bonus-cost").innerText = (
+          getBetAmount() * CONSTANTS.BONUS_COST_MULT
+        ).toLocaleString();
+      }
+
+      function buyBonus() {
+        if (state.spinning || state.bonusActive || state.paused || state.dead)
+          return;
+        let cost = getBetAmount() * CONSTANTS.BONUS_COST_MULT;
+        if (state.wallet >= cost) {
+          state.wallet -= cost;
+          triggerBonus(10);
+        } else spawnText("NO COINS", 2, 1, "red");
+      }
+
+      function manualSpin() {
+        if (state.autoSpin) return;
+        if (state.bonusActive) {
+          state.autoSpin = true;
+          document.getElementById("spin-btn").innerText = "AUTO";
+          document.getElementById("spin-btn").disabled = true;
+          startSpin();
+        } else {
+          startSpin();
+        }
+      }
+
+      async function startSpin() {
+        if (state.spinning || state.paused || state.dead) return;
+        const bet = getBetAmount();
+
+        // <-- FIX: Reset spin-specific stats
+        state.currentSpinWin = 0;
+        state.currentCombo = 0;
+
+        if (!state.bonusActive) {
+          if (state.wallet < bet) return spawnText("NO COINS", 2, 1, "red");
+          state.wallet -= bet;
+        } else {
+          state.bonusSpins--;
+          if (state.bonusSpins < 0) {
+            state.bonusActive = false;
+            state.autoSpin = false;
+            document.getElementById("spin-btn").innerText = "SPIN";
+            document.getElementById("spin-btn").disabled = false;
+            return;
+          }
+        }
+
+        if (state.shieldRounds > 0) {
+          state.shieldRounds--;
+          if (state.shieldRounds <= 0) {
+            state.shieldHp = 0;
+            spawnText("SHIELD GONE", 0, 0, "gray");
+          }
+        }
+
+        state.spinning = true;
+        state.matches = [];
+        updateUI();
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) state.reelMoving[c] = true;
+
+        let nextGrid = [];
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          nextGrid[c] = [];
+          for (let r = 0; r < CONSTANTS.ROWS; r++)
+            nextGrid[c][r] = getRandomSym();
+        }
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          await wait(CONSTANTS.REEL_DELAY);
+          state.reelMoving[c] = false;
+          state.grid[c] = nextGrid[c];
+          state.reelOffsets[c] = 35;
+        }
+
+        checkMatches();
+      }
+
+      function checkMatches() {
+        let matches = [];
+        let visited = create2DArray(false);
+        const get = (c, r) => state.grid[c][r];
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          for (let r = 0; r < CONSTANTS.ROWS; r++) {
+            if (visited[c][r]) continue;
+            let type = get(c, r);
+            if (type === SYMBOLS.SCATTER) continue;
+
+            let group = [{ c, r }];
+            let stack = [{ c, r }];
+            visited[c][r] = true;
+
+            while (stack.length) {
+              let curr = stack.pop();
+              [
+                [0, 1],
+                [0, -1],
+                [1, 0],
+                [-1, 0],
+              ].forEach(([dc, dr]) => {
+                let nc = curr.c + dc,
+                  nr = curr.r + dr;
+                if (
+                  nc >= 0 &&
+                  nc < CONSTANTS.COLS &&
+                  nr >= 0 &&
+                  nr < CONSTANTS.ROWS &&
+                  !visited[nc][nr]
+                ) {
+                  let nType = get(nc, nr);
+                  if (
+                    (type === nType ||
+                      type === SYMBOLS.WILD ||
+                      nType === SYMBOLS.WILD) &&
+                    nType !== SYMBOLS.SCATTER
+                  ) {
+                    if (type === SYMBOLS.WILD && nType !== SYMBOLS.WILD)
+                      type = nType;
+                    visited[nc][nr] = true;
+                    group.push({ c: nc, r: nr });
+                    stack.push({ c: nc, r: nr });
+                  }
+                }
+              });
+            }
+            if (group.length >= 3) matches.push({ type, tiles: group });
+          }
+        }
+
+        let scatters = [];
+        state.grid.forEach((col, c) =>
+          col.forEach((s, r) => {
+            if (s === SYMBOLS.SCATTER) scatters.push({ c, r });
+          })
+        );
+        if (scatters.length >= 3)
+          matches.push({ type: SYMBOLS.SCATTER, tiles: scatters });
+
+        state.matches = matches;
+        if (matches.length > 0) {
+          // <-- FIX: Increment combo
+          state.currentCombo++;
+          if (state.currentCombo > state.highestCombo) {
+            state.highestCombo = state.currentCombo;
+          }
+          setTimeout(() => resolveMatches(matches), 500);
+        } else finishRound();
+      }
+
+      function resolveMatches(matches) {
+        let win = 0;
+        let destroyed = create2DArray(false);
+        const bet = getBetAmount();
+
+        matches.forEach((m) => {
+          let cnt = m.tiles.length;
+          let sym = m.type;
+          if (sym === SYMBOLS.SWORD) anim_Attack(cnt);
+          else if (sym === SYMBOLS.POTION) anim_Heal(cnt);
+          else if (sym === SYMBOLS.SHIELD) anim_Shield(cnt);
+          else if (sym === SYMBOLS.SKULL) anim_Dmg(cnt);
+          else if (sym === SYMBOLS.SCATTER) triggerBonus(cnt);
+          else {
+            let mult = 0.2;
+            if (sym === SYMBOLS.C_M) mult = 0.5;
+            if (sym === SYMBOLS.C_L) mult = 1.5;
+            if (cnt > 3) mult *= 2;
+            win += Math.floor(bet * mult * cnt);
+          }
+          m.tiles.forEach((t) => (destroyed[t.c][t.r] = true));
+        });
+
+        if (win > 0) {
+          state.wallet += win;
+          state.currentSpinWin += win; // <-- FIX
+          spawnText("+" + win, 1.5, 1, "gold");
+        }
+        updateUI();
+        state.matches = [];
+        setTimeout(() => performCascade(destroyed), 300);
+      }
+
+      function performCascade(destroyed) {
+        // Re-initialize 2D array for offsets
+        state.cascadeOffsets = create2DArray(0);
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          let oldCol = state.grid[c];
+          let newCol = [];
+          let dropCount = 0;
+
+          // Count how many destroyed
+          for (let r = 0; r < CONSTANTS.ROWS; r++)
+            if (destroyed[c][r]) dropCount++;
+
+          // 1. Surviving tiles fall down
+          let writeIdx = CONSTANTS.ROWS - 1;
+          for (let r = CONSTANTS.ROWS - 1; r >= 0; r--) {
+            if (!destroyed[c][r]) {
+              newCol[writeIdx] = oldCol[r];
+              // Calculate individual offset: (OldRow - NewRow) * Size
+              // Result is negative (tile is visually higher than destination)
+              // If r == writeIdx, offset is 0 (doesn't move)
+              state.cascadeOffsets[c][writeIdx] =
+                (r - writeIdx) * CONSTANTS.TILE_SIZE;
+              writeIdx--;
+            }
+          }
+
+          // 2. New tiles fill from top
+          while (writeIdx >= 0) {
+            newCol[writeIdx] = getRandomSym();
+            // They fall from the "stack" above.
+            // If 3 items popped, they start at -3 * size
+            state.cascadeOffsets[c][writeIdx] =
+              -dropCount * CONSTANTS.TILE_SIZE;
+            writeIdx--;
+          }
+
+          // Update Grid
+          state.grid[c] = newCol;
+        }
+        setTimeout(checkMatches, 400); // Wait for animation to potentially finish
+      }
+
+      function finishRound() {
+        state.spinning = false;
+        if (state.enemyHp <= 0) nextLevel();
+        saveData(); // <-- FIX: Save data at end of round
+        if (
+          state.bonusActive &&
+          state.autoSpin &&
+          !state.dead &&
+          !state.paused
+        ) {
+          setTimeout(startSpin, 800);
+        } else if (state.bonusActive && state.bonusSpins <= 0) {
+          state.bonusActive = false;
+          state.autoSpin = false;
+          document.getElementById("spin-btn").innerText = "SPIN";
+          document.getElementById("spin-btn").disabled = false;
+          // Use the modal for bonus complete
+          toggleModal("boss-modal", true);
+          const bossInfo = document.getElementById("boss-info");
+          bossInfo.innerHTML = `<span class="text-green-400 text-lg">BONUS COMPLETE!</span>`;
+          document.getElementById("boss-continue-btn").onclick = () => {
+            toggleModal("boss-modal", false);
+            document.getElementById("boss-continue-btn").onclick =
+              closeBossModal;
+          };
+        }
+      }
+
+      /* --- BATTLE LOGIC & ANIMATION --- */
+      function setPlayerAnim(name) {
+        if (playerState.name === name) return;
+        let anim = playerAnims[name];
+        if (!anim) return;
+
+        playerState.name = name;
+        playerState.frame = 0;
+        playerState.lastTime = 0;
+        playerState.loop = true;
+        playerState.onComplete = null;
+
+        switch (name) {
+          case "walk":
+            playerState.onComplete = () => setPlayerAnim("throw");
+            break;
+          case "throw":
+            playerState.loop = false;
+            playerState.onComplete = () => {
+              let dmg = playerState.attackPower;
+              state.enemyHp -= dmg;
+              state.totalDamage += dmg; // <-- FIX
+              spawnText("-" + dmg, 3, 0, "red");
+              setPlayerAnim("idle");
+            };
+            break;
+          case "roll":
+            playerState.onComplete = () => setPlayerAnim("combo");
+            break;
+          case "combo":
+            playerState.loop = false;
+            playerState.onComplete = () => {
+              let dmg = playerState.attackPower;
+              state.enemyHp -= dmg;
+              state.totalDamage += dmg; // <-- FIX
+              spawnText("-" + dmg, 3, 0, "red");
+              setPlayerAnim("idle");
+            };
+            break;
+          case "taunt": // ✨ NEW
+            anim = playerAnims.taunt;
+            playerState.loop = false;
+            playerState.onComplete = () => setPlayerAnim("idle");
+            break;
+          case "hit":
+            playerState.loop = false;
+            playerState.onComplete = () => setPlayerAnim("idle");
+            break;
+          case "death":
+            playerState.loop = false;
+            break;
+          case "idle":
+          default:
+            playerState.targetX = playerState.startX;
+            break;
+        }
+      }
+
+      function anim_Attack(n) {
+        if (playerState.name !== "idle" || state.paused) return;
+
+        playerState.attackPower = n * 10; // Store damage
+
+        if (n > 3) {
+          // Heavy attack: Roll -> Combo
+          playerState.targetX = playerState.startX + 200;
+          setPlayerAnim("roll");
+        } else {
+          // Light attack: Walk -> Throw
+          playerState.targetX = playerState.startX + 180;
+          setPlayerAnim("walk");
+        }
+      }
+      function anim_Heal(n) {
+        let amt = n * 4;
+        state.hp = Math.min(state.maxHp, state.hp + amt);
+        spawnText("+" + amt, 0, 0, "green");
+      }
+      function anim_Shield(n) {
+        let bonus = (n - 3) * 5;
+        let amt = 15 + (bonus > 0 ? bonus : 0);
+        if (state.shieldRounds > 0) {
+          state.shieldHp += amt;
+          state.shieldRounds += 1;
+          spawnText("SHIELD UP!", 0, 0, "cyan");
+        } else {
+          state.shieldHp = amt;
+          state.shieldRounds = 3;
+          spawnText("SHIELD ON", 0, 0, "cyan");
+        }
+      }
+      function anim_Dmg(n) {
+        if (state.dead) return;
+        setPlayerAnim("hit"); // Play hit animation
+
+        let damagePerSkull = 8 + (state.stage - 1);
+        let totalDmg = n * damagePerSkull;
+        if (state.shieldHp > 0) {
+          state.shieldHp -= totalDmg;
+          if (state.shieldHp < 0) {
+            let excess = Math.abs(state.shieldHp);
+            state.shieldHp = 0;
+            state.hp -= excess;
+            spawnText("BROKEN -" + excess, 0, 0, "red");
+          } else {
+            spawnText("BLOCKED", 0, 0, "cyan");
+          }
+        } else {
+          state.hp -= totalDmg;
+          spawnText("-" + totalDmg, 0, 0, "red");
+        }
+        if (state.hp <= 0) handleDeath();
+      }
+      function handleDeath() {
+        state.dead = true;
+        state.paused = true;
+        setPlayerAnim("death");
+        document.getElementById("game-over-overlay").classList.remove("hidden");
+      }
+      function revivePlayer() {
+        document.getElementById("game-over-overlay").classList.add("hidden");
+        state.hp = 100;
+        state.stage = 1;
+        state.enemyMaxHp = 100;
+        state.enemyHp = 100;
+        state.dead = false;
+        state.paused = false;
+        state.bonusActive = false;
+        state.autoSpin = false;
+        state.shieldHp = 0;
+        state.shieldRounds = 0;
+        setPlayerAnim("idle");
+        document.getElementById("spin-btn").innerText = "SPIN";
+        document.getElementById("spin-btn").disabled = false;
+        updateUI();
+        saveData();
+      }
+
+      function triggerBonus(n) {
+        if (!state.bonusActive) {
+          state.bonusActive = true;
+          state.bonusSpins = n > 3 ? 15 : 10;
+          state.autoSpin = false;
+          updateUI();
+          document.getElementById("spin-btn").innerText = "START";
+          // Use a modal instead of alert
+          toggleModal("boss-modal", true);
+          const bossInfo = document.getElementById("boss-info");
+          bossInfo.innerHTML = `<span class="text-pink-400 text-lg">BONUS ROUND!</span><br>${state.bonusSpins} SPINS<br><span class="text-xs text-gray-300">No Skulls, High Healing!</span>`;
+          document.getElementById("boss-continue-btn").onclick = () => {
+            toggleModal("boss-modal", false);
+            // Reset button for boss encounters
+            document.getElementById("boss-continue-btn").onclick =
+              closeBossModal;
+          };
+        }
+      }
+
+      async function nextLevel() {
+        state.paused = true;
+        state.enemyName = null; // Clear previous boss name
+        const overlay = document.getElementById("stage-clear-overlay");
+        overlay.classList.remove("hidden");
+
+        await wait(2000); // Use await for clarity
+
+        overlay.classList.add("hidden");
+        state.stage++;
+
+        // ✨ GEMINI BOSS/ENEMY ENCOUNTER LOGIC ✨
+        if (state.stage % 5 === 0) {
+          // It's a boss stage!
+          state.enemyMaxHp += 50;
+          state.enemyMaxHp *= 2; // Bosses are TOUGH
+          await handleBossEncounter(); // This will pause and call Gemini
+        } else {
+          // Normal level up
+          state.enemyMaxHp += 50;
+          await handleNormalEncounter(); // ✨ NEW: Call Gemini for a normal enemy name
+        }
+
+        state.enemyHp = state.enemyMaxHp;
+        updateUI();
+
+        if (state.bonusActive && state.autoSpin) finishRound();
+      }
+
+      // ✨ New function to close the boss modal and unpause
+      function closeBossModal() {
+        toggleModal("boss-modal", false);
+        state.paused = false;
+        // Reset button text for next time
+        document.getElementById("boss-info").innerHTML = "✨ Generating foe...";
+      }
+
+      // ✨ New function to handle boss generation
+      async function handleBossEncounter() {
+        toggleModal("boss-modal", true); // Show the "Boss Incoming" modal
+
+        const env =
+          state.stage > 10
+            ? "Hell Gate"
+            : state.stage > 5
+            ? "Autumn Woods"
+            : "Spring Fields";
+        const systemPrompt =
+          "You are a fantasy dungeon master. You generate short, epic descriptions of monsters. Respond in JSON.";
+        const userQuery = `The player has reached Stage ${state.stage} in the ${env}. Generate a unique bossName (2-3 words) and a 1-sentence epic description of their arrival.`;
+
+        const schema = {
+          type: "OBJECT",
+          properties: {
+            bossName: { type: "STRING" },
+            description: { type: "STRING" },
+          },
+          required: ["bossName", "description"],
+        };
+
+        try {
+          const text = await callGeminiAPI(systemPrompt, userQuery, schema);
+
+          if (!text) throw new Error("No response from API");
+
+          const boss = JSON.parse(text);
+          state.enemyName = boss.bossName.toUpperCase();
+
+          // Update the modal with the boss info
+          const bossInfo = document.getElementById("boss-info");
+          bossInfo.innerHTML = `
+            <span class="text-red-500 text-lg">${boss.bossName.toUpperCase()}</span><br>
+            <span class="text-sm text-gray-300">${boss.description}</span>
+        `;
+        } catch (error) {
+          console.error("Gemini API failed, using fallback:", error);
+          // Fallback so the game doesn't break
+          state.enemyName = "DREAD GOLGOT";
+          const bossInfo = document.getElementById("boss-info");
+          bossInfo.innerHTML = `
+            <span class="text-red-500 text-lg">DREAD GOLGOT</span><br>
+            <span class="text-sm text-gray-300">A shadow congeals in the gloom, taking on a horrifying form!</span>
+        `;
+        }
+      }
+
+      // ✨ NEW: Handle Normal Encounter
+      async function handleNormalEncounter() {
+        const env =
+          state.stage > 10
+            ? "Hell Gate"
+            : state.stage > 5
+            ? "Autumn Woods"
+            : "Spring Fields";
+        const systemPrompt =
+          "You are a fantasy dungeon master. You generate short, cool monster names. Respond in JSON.";
+        const userQuery = `The player is in the ${env}. Generate a unique, 2-word monster name (e.g., "Gloom Sprite", "Rock Golem") for a common enemy.`;
+
+        const schema = {
+          type: "OBJECT",
+          properties: { name: { type: "STRING" } },
+          required: ["name"],
+        };
+
+        try {
+          const text = await callGeminiAPI(systemPrompt, userQuery, schema);
+          if (!text) throw new Error("No response from API");
+
+          const enemy = JSON.parse(text);
+          state.enemyName = enemy.name.toUpperCase();
+        } catch (error) {
+          console.error("Gemini API failed, using fallback:", error);
+          // Fallback so the game doesn't break
+          const fallbacks = [
+            "GOBLIN",
+            "SLIME",
+            "GIANT RAT",
+            "DIRE WOLF",
+            "SKELETON",
+          ];
+          state.enemyName =
+            fallbacks[Math.floor(Math.random() * fallbacks.length)];
+        }
+
+        state.paused = false; // Unpause for normal levels
+      }
+
+      // ✨ NEW: Handle Player Taunt
+      async function handleTaunt() {
+        if (state.paused || state.dead || playerState.name !== "idle") return; // Can only taunt from idle
+
+        const tauntBtn = document.getElementById("taunt-btn");
+        tauntBtn.disabled = true;
+        setPlayerAnim("taunt"); // Play blink animation
+
+        const systemPrompt =
+          "You are a sassy panda warrior. You generate short, witty 1-sentence taunts for your enemies. Respond in JSON.";
+        const userQuery = `I am facing an enemy called "${
+          state.enemyName || "a big red box"
+        }". Give me a funny or cool taunt.`;
+
+        const schema = {
+          type: "OBJECT",
+          properties: { taunt: { type: "STRING" } },
+          required: ["taunt"],
+        };
+
+        const bubble = document.getElementById("speech-bubble");
+        const bubbleText = document.getElementById("speech-text");
+
+        bubbleText.innerText = "...";
+        bubble.classList.remove("hidden");
+
+        try {
+          const text = await callGeminiAPI(systemPrompt, userQuery, schema);
+          if (!text) throw new Error("No response from API");
+
+          const response = JSON.parse(text);
+          bubbleText.innerText = response.taunt;
+        } catch (error) {
+          console.error("Gemini API failed, using fallback:", error);
+          bubbleText.innerText = "You're going down!";
+          // Show API error modal if it failed
+          if (
+            error.message.includes("API Error") ||
+            error.message.includes("Failed to fetch")
+          ) {
+            toggleModal("api-error-modal", true);
+          }
+        }
+
+        // Hide bubble after 3 seconds
+        setTimeout(() => {
+          bubble.classList.add("hidden");
+          tauntBtn.disabled = false;
+        }, 3000);
+      }
+
+      // ✨ New Gemini API Call Function
+      async function callGeminiAPI(systemPrompt, userQuery, schema = null) {
+        // --- API KEY MOVED HERE ---
+        // ✨ PASTE YOUR API KEY HERE ✨
+        const apiKey = "AIzaSyCHSDcjnlBscL0YH34KLdJDRV8vbgAWJHk"; // <-- PASTE YOUR KEY BETWEEN THE QUOTES
+        // --------------------------
+
+        if (!apiKey) {
+          console.error(
+            "Gemini API key is missing. Please add it to index.html script."
+          );
+          toggleModal("api-error-modal", true); // <-- Show error modal
+          throw new Error("API Key is missing."); // Fail fast
+        }
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        const payload = {
+          contents: [{ parts: [{ text: userQuery }] }],
+          systemInstruction: {
+            parts: [{ text: systemPrompt }],
+          },
+        };
+
+        if (schema) {
+          payload.generationConfig = {
+            responseMimeType: "application/json",
+            responseSchema: schema,
+          };
+        }
+
+        // Add exponential backoff
+        let delay = 1000;
+        for (let i = 0; i < 3; i++) {
+          try {
+            let response = await fetch(apiUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.status === 429) {
+              // Throttling
+              await wait(delay);
+              delay *= 2;
+              continue; // Retry
+            }
+            if (!response.ok) {
+              const errorBody = await response.text();
+              console.error("API Error Body:", errorBody);
+              toggleModal("api-error-modal", true); // <-- Show error modal
+              throw new Error(`API Error: ${response.status}`);
+            }
+
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+              return candidate.content.parts[0].text;
+            } else {
+              console.warn("Unexpected API response structure:", result);
+              return null;
+            }
+          } catch (error) {
+            console.error("Error calling Gemini API:", error);
+            if (error.message.includes("API Error")) throw error; // Re-throw critical errors
+            if (i === 2) throw new Error("Failed to fetch after retries"); // Return null on final failure
+            await wait(delay);
+            delay *= 2;
+          }
+        }
+      }
+
+      /* --- VISUALS --- */
+      function drawEnvironment() {
+        let skyColor = "#60a5fa";
+        if (state.stage > 5) skyColor = "#fb923c";
+        if (state.stage > 10) skyColor = "#7f1d1d";
+
+        let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        grad.addColorStop(0, skyColor);
+        grad.addColorStop(1, "#000");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        let horizon = CONSTANTS.OFFSET_Y - 40;
+        ctx.fillStyle =
+          state.stage > 10
+            ? "#450a0a"
+            : state.stage > 5
+            ? "#78350f"
+            : "#15803d";
+        ctx.fillRect(0, horizon, canvas.width, canvas.height);
+
+        // Platform Shadow
+        ctx.fillStyle = "rgba(0,0,0,0.3)";
+        ctx.fillRect(canvas.width / 2 - 200, horizon, 400, 10);
+      }
+
+      function gameLoop(timestamp) {
+        if (!gameLoopRunning) return;
+
+        // Prevent drawing if canvas is not ready
+        if (canvas.height === 0 || canvas.width === 0) {
+          requestAnimationFrame(gameLoop);
+          return;
+        }
+
+        // --- FIX for Black Screen ---
+        // Only draw if time has passed. This prevents state
+        // from updating before the first frame is drawn.
+        if (timestamp > lastDrawTime) {
+          draw();
+          updatePlayerAnimation(timestamp);
+
+          // Smooth player movement
+          if (Math.abs(playerState.targetX - playerState.x) > 1) {
+            playerState.x += (playerState.targetX - playerState.x) * 0.1;
+          } else {
+            playerState.x = playerState.targetX;
+          }
+
+          // Reel/Slot animations
+          for (let c = 0; c < CONSTANTS.COLS; c++) {
+            if (state.reelOffsets[c] > 0) state.reelOffsets[c] -= 2;
+
+            // Per-tile cascade animation
+            if (state.cascadeOffsets[c]) {
+              for (let r = 0; r < CONSTANTS.ROWS; r++) {
+                if (state.cascadeOffsets[c][r] < 0) {
+                  state.cascadeOffsets[c][r] += CONSTANTS.CASCADE_SPEED;
+                  if (state.cascadeOffsets[c][r] > 0)
+                    state.cascadeOffsets[c][r] = 0;
+                }
+              }
+            }
+          }
+
+          // ✨ Update UI positions
+          updateDynamicUI();
+
+          lastDrawTime = timestamp;
+        }
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      // ✨ NEW: Update positions of HTML elements
+      function updateDynamicUI() {
+        if (state.dead || !gameLoopRunning || !CONSTANTS.OFFSET_Y) return;
+
+        let cx = canvas.width / 2;
+        let bottomY = CONSTANTS.OFFSET_Y - 40;
+        let charSize = 60;
+        let topY = bottomY - charSize;
+        let playerX = playerState.startX; // Use the stored startX
+
+        // Position Taunt Button
+        const tauntBtn = document.getElementById("taunt-btn-container");
+        if (tauntBtn) {
+          tauntBtn.style.left = playerX + charSize + 5 + "px"; // Next to player
+          tauntBtn.style.top = topY + 15 + "px";
+        }
+
+        // Position Speech Bubble
+        const bubble = document.getElementById("speech-bubble");
+        if (bubble && !bubble.classList.contains("hidden")) {
+          bubble.style.left = playerX + 30 + "px"; // Above player
+          bubble.style.top = topY - 60 + "px";
+        }
+      }
+
+      function draw() {
+        if (canvas.height === 0 || canvas.width === 0) return; // Safety check
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear first
+
+        drawEnvironment();
+        drawBattle();
+
+        let ox = CONSTANTS.OFFSET_X;
+        let oy = CONSTANTS.OFFSET_Y;
+
+        if (!oy) return; // Don't draw slots if layout isn't ready
+
+        // SLOT BG
+        ctx.fillStyle = "rgba(20, 20, 20, 0.95)";
+        ctx.fillRect(0, oy - 20, canvas.width, canvas.height);
+
+        // BORDER
+        ctx.strokeStyle = "#d97706";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(
+          ox - 10,
+          oy - 10,
+          CONSTANTS.COLS * CONSTANTS.TILE_SIZE + 20,
+          CONSTANTS.ROWS * CONSTANTS.TILE_SIZE + 20
+        );
+
+        // INNER BG
+        ctx.fillStyle = "rgba(0,0,0,0.6)";
+        ctx.fillRect(
+          ox - 10,
+          oy - 10,
+          CONSTANTS.COLS * CONSTANTS.TILE_SIZE + 20,
+          CONSTANTS.ROWS * CONSTANTS.TILE_SIZE + 20
+        );
+
+        // --- CLIPPING MASK START ---
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(
+          ox - 10,
+          oy - 10,
+          CONSTANTS.COLS * CONSTANTS.TILE_SIZE + 20,
+          CONSTANTS.ROWS * CONSTANTS.TILE_SIZE + 20
+        );
+        ctx.clip();
+
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          // Use reel offset OR individual tile offset
+          let reelOff = state.reelOffsets[c];
+
+          if (state.reelMoving[c]) {
+            for (let i = 0; i < 4; i++) {
+              let rImg = assets[Math.floor(Math.random() * 9)];
+              if (rImg) {
+                ctx.globalAlpha = 0.6;
+                ctx.drawImage(
+                  rImg,
+                  ox + c * CONSTANTS.TILE_SIZE + 8,
+                  oy +
+                    (i - 1) * CONSTANTS.TILE_SIZE +
+                    (Date.now() % CONSTANTS.TILE_SIZE),
+                  64,
+                  74
+                );
+                ctx.globalAlpha = 1.0;
+              }
+            }
+          } else {
+            for (let r = 0; r < CONSTANTS.ROWS; r++) {
+              let sym = state.grid[c][r];
+              // Calculate Y based on specific tile offset
+              let tileOff =
+                (state.cascadeOffsets[c] && state.cascadeOffsets[c][r]) || 0;
+
+              let drawY = oy + r * CONSTANTS.TILE_SIZE + 8 + reelOff + tileOff;
+
+              if (assets[sym])
+                ctx.drawImage(
+                  assets[sym],
+                  ox + c * CONSTANTS.TILE_SIZE + 8,
+                  drawY
+                );
+            }
+          }
+        }
+        ctx.restore();
+        // --- CLIPPING MASK END ---
+
+        if (state.matches.length > 0) {
+          ctx.lineWidth = 6;
+          ctx.lineCap = "round";
+          ctx.shadowBlur = 10;
+          state.matches.forEach((m) => {
+            if (m.type === SYMBOLS.SCATTER) return;
+            ctx.strokeStyle = COLORS[m.type] || "white";
+            ctx.shadowColor = COLORS[m.type];
+            ctx.beginPath();
+            m.tiles.forEach((t, i) => {
+              let x = ox + t.c * CONSTANTS.TILE_SIZE + 40;
+              let y =
+                oy + t.r * CONSTANTS.TILE_SIZE + 40 + state.reelOffsets[t.c];
+              if (i === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+          });
+          ctx.shadowBlur = 0;
+        }
+
+        state.particles.forEach((p, i) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life--;
+          ctx.fillStyle = p.c;
+          ctx.fillRect(p.x, p.y, p.s, p.s);
+          if (p.life <= 0) state.particles.splice(i, 1);
+        });
+      }
+
+      function updatePlayerAnimation(timestamp) {
+        if (!playerState.lastTime) playerState.lastTime = timestamp;
+        const elapsed = timestamp - playerState.lastTime;
+        const anim = playerAnims[playerState.name];
+        if (!anim) return;
+
+        const speed =
+          playerState.name === "roll" ? anim.speed / 1.5 : anim.speed;
+
+        if (elapsed > speed) {
+          playerState.lastTime = timestamp;
+          playerState.frame++;
+          if (playerState.frame >= anim.frames) {
+            if (playerState.loop) {
+              playerState.frame = 0;
+            } else {
+              playerState.frame = anim.frames - 1;
+              if (playerState.onComplete) {
+                playerState.onComplete();
+              }
+            }
+          }
+        }
+      }
+
+      function drawBattle() {
+        let cx = canvas.width / 2;
+        let bottomY = CONSTANTS.OFFSET_Y - 40;
+        if (!bottomY || bottomY < 100) bottomY = 180; // <-- FIX for black screen
+
+        let charSize = 60; // Base size
+        let topY = bottomY - charSize;
+
+        // Player
+        let playerX = cx - 150;
+        playerState.startX = playerX; // Set base X
+        playerState.y = topY;
+
+        // -- Draw Player Sprite --
+        const anim = playerAnims[playerState.name];
+        const img = playerAnimData[playerState.name];
+        if (anim && img && img.complete && img.width > 0) {
+          // <-- FIX: Check img.width
+          const frameW = anim.frameW || 32;
+          const frameH = img.height;
+          const scale = (charSize / frameW) * 1.5; // Make sprite a bit bigger
+          const drawW = frameW * scale;
+          const drawH = frameH * scale;
+
+          ctx.save();
+          ctx.translate(playerState.x + drawW / 2, playerState.y + drawH / 2);
+          if (playerState.name === "roll") {
+            ctx.rotate(playerState.frame * (Math.PI / 4)); // Spin effect for roll
+          }
+          ctx.drawImage(
+            img,
+            playerState.frame * frameW,
+            0,
+            frameW,
+            frameH, // source rect
+            -drawW / 2,
+            -drawH / 2,
+            drawW,
+            drawH // dest rect
+          );
+          ctx.restore();
+        } else {
+          // Fallback box
+          ctx.fillStyle = "#3b82f6";
+          ctx.fillRect(playerState.x, playerState.y, charSize, charSize);
+        }
+
+        ctx.fillStyle = "white";
+        ctx.font = "10px sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(
+          `HP: ${Math.ceil(state.hp)}/${state.maxHp}`,
+          playerX,
+          topY - 10
+        );
+        drawBar(playerX, topY - 5, 60, state.hp, state.maxHp, "#22c55e");
+
+        if (state.shieldHp > 0) {
+          ctx.strokeStyle = "cyan";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(playerX - 2, topY - 2, charSize + 4, charSize + 4);
+          ctx.fillStyle = "cyan";
+          ctx.font = "10px sans-serif";
+          ctx.fillText(`🛡️${state.shieldHp}`, playerX, topY + charSize + 15);
+        }
+
+        // Enemy
+        ctx.fillStyle = "#ef4444";
+        ctx.fillRect(cx + 90, topY, charSize, charSize);
+        ctx.fillStyle = "white";
+        ctx.textAlign = "right";
+
+        // ✨ Draw Boss/Enemy Name if it exists
+        if (state.enemyName) {
+          ctx.font = "bold 12px 'Press Start 2P'";
+          ctx.fillStyle = state.stage % 5 === 0 ? "#f87171" : "#eab308"; // Red for Boss, Yellow for normal
+          ctx.fillText(state.enemyName, cx + 150, topY - 25);
+          ctx.font = "10px sans-serif"; // Reset font
+          ctx.fillStyle = "white";
+        }
+
+        ctx.fillText(
+          `HP: ${Math.ceil(state.enemyHp)}/${state.enemyMaxHp}`,
+          cx + 150,
+          topY - 10
+        );
+        drawBar(
+          cx + 90,
+          topY - 5,
+          60,
+          state.enemyHp,
+          state.enemyMaxHp,
+          "#ef4444"
+        );
+      }
+
+      function drawBar(x, y, w, v, m, c) {
+        ctx.fillStyle = "#000";
+        ctx.fillRect(x, y, w, 6);
+        ctx.fillStyle = c;
+        ctx.fillRect(x + 1, y + 1, Math.max(0, (w - 2) * (v / m)), 4);
+      }
+
+      /* --- HELPERS --- */
+      function spawnText(txt, c, r, col) {
+        const el = document.createElement("div");
+        el.className = "float-text";
+        el.innerText = txt;
+        el.style.color = col;
+        let x =
+          c === 0 && r === 0
+            ? canvas.width / 2 - 120
+            : c === 3 && r === 0
+            ? canvas.width / 2 + 120
+            : CONSTANTS.OFFSET_X + c * 80 + 40;
+        let y =
+          c === 0 && r === 0
+            ? CONSTANTS.OFFSET_Y - 100
+            : c === 3 && r === 0
+            ? CONSTANTS.OFFSET_Y - 100
+            : CONSTANTS.OFFSET_Y + r * 80;
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1200);
+      }
+      function createParticles(c, r) {
+        for (let i = 0; i < 6; i++)
+          state.particles.push({
+            x: CONSTANTS.OFFSET_X + c * 80 + 40,
+            y: CONSTANTS.OFFSET_Y + r * 80 + 40,
+            vx: (Math.random() - 0.5) * 12,
+            vy: (Math.random() - 0.5) * 12,
+            c: COLORS[state.grid[c][r]],
+            s: Math.random() * 6 + 2,
+            life: 20,
+          });
+      }
+      function create2DArray(v) {
+        let a = [];
+        for (let c = 0; c < CONSTANTS.COLS; c++) {
+          a[c] = [];
+          for (let r = 0; r < CONSTANTS.ROWS; r++) a[c][r] = v;
+        }
+        return a;
+      }
+      function wait(ms) {
+        return new Promise((r) => setTimeout(r, ms));
+      }
+
+      // Updated to allow forcing state
+      async function toggleModal(id, forceShow = null) {
+        // <-- FIX: Made async
+        const el = document.getElementById(id);
+        let showing = el.classList.contains("hidden");
+
+        if (forceShow === true) {
+          el.classList.remove("hidden");
+          showing = true;
+        } else if (forceShow === false) {
+          el.classList.add("hidden");
+          showing = false;
+        } else {
+          el.classList.toggle("hidden");
+          showing = !el.classList.contains("hidden");
+        }
+
+        // <-- FIX: Load leaderboard data when shown
+        if (id === "lb-modal" && showing) {
+          await showLeaderboard();
+        }
+
+        // <-- FIX: Load admin data when shown
+        if (id === "admin-modal" && showing) {
+          await getAdminRequests();
+        }
+      }
+
+      // <-- FIX: New function to show leaderboard
+      async function showLeaderboard() {
+        const listEl = document.getElementById("lb-list");
+        listEl.innerHTML = "Loading...";
+
+        let data = null;
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("leaderboard", {});
+          if (res && res.success) data = res.leaderboard;
+        } else {
+          // Local fallback
+          let db = JSON.parse(localStorage.getItem("bs_users") || "{}");
+          data = Object.values(db)
+            .map((u) => ({
+              username: u.username,
+              highest_stage: u.stage,
+              highest_dmg: u.totalDamage || 0,
+              highest_combo: u.highestCombo || 0,
+            }))
+            .sort((a, b) => b.highest_stage - a.highest_stage);
+        }
+
+        if (data && data.length > 0) {
+          listEl.innerHTML = ""; // Clear
+          data.forEach((row, i) => {
+            listEl.innerHTML += `
+                    <div class="p-1 ${i % 2 ? "bg-gray-200" : ""}">
+                        <span class="font-bold">${i + 1}. ${
+              row.username
+            }</span><br>
+                        <span class="text-xs ml-4">
+                            Stage: ${row.highest_stage} | 
+                            Dmg: ${row.highest_dmg} | 
+                            Combo: ${row.highest_combo}
+                        </span>
+                    </div>
+                  `;
+          });
+        } else {
+          listEl.innerHTML = "No Data";
+        }
+      }
+
+      // <-- FIX: New/Updated functions for admin panel
+      async function getAdminRequests() {
+        const listEl = document.getElementById("admin-list");
+        listEl.innerHTML = "Loading...";
+
+        let requests = null;
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("admin_get_requests", {
+            username: state.user.username,
+          });
+          if (res && res.success) requests = res.requests;
+        } else {
+          // Local fallback
+          requests = JSON.parse(
+            localStorage.getItem("bs_coin_requests") || "[]"
+          ).filter((r) => r.status === "pending");
+        }
+
+        if (requests && requests.length > 0) {
+          listEl.innerHTML = "";
+          requests.forEach((req) => {
+            listEl.innerHTML += `
+                    <div class="p-1 mb-1 border-b border-gray-300">
+                        <span class="font-bold">${req.username}</span>
+                        <button onclick="approveRequest(${req.request_id}, '${req.username}')" 
+                                class="float-right bg-green-500 text-white px-1 text-[10px]">
+                            Approve
+                        </button>
+                    </div>
+                  `;
+          });
+        } else {
+          listEl.innerHTML = "No pending requests.";
+        }
+      }
+
+      async function approveRequest(id, username) {
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("admin_approve_request", {
+            admin_user: state.user.username,
+            request_id: id,
+          });
+          if (res && res.success) {
+            alert(res.message);
+          } else {
+            alert(res ? res.message : "Failed.");
+          }
+        } else {
+          // Local fallback
+          let reqs = JSON.parse(
+            localStorage.getItem("bs_coin_requests") || "[]"
+          );
+          let req = reqs.find((r) => r.id === id);
+          if (req) req.status = "approved";
+          localStorage.setItem("bs_coin_requests", JSON.stringify(reqs));
+
+          let db = JSON.parse(localStorage.getItem("bs_users"));
+          if (db[username]) db[username].coins = 500;
+          localStorage.setItem("bs_users", JSON.stringify(db));
+          alert(`Approved ${username}!`);
+        }
+        await getAdminRequests(); // Refresh list
+      }
+
+      function logout() {
+        saveData(); // Save before logging out
+        location.reload();
+      }
+
+      async function requestCoins() {
+        if (!state.user) return alert("You must be logged in.");
+        if (USE_PHP_BACKEND) {
+          const res = await apiCall("request_coins", {
+            username: state.user.username,
+          });
+          alert(res ? res.message : "Failed to send request.");
+        } else {
+          alert("Coin request sent (Local). Admin must log in to approve.");
+          // LocalStorage fallback logic
+          let reqs = JSON.parse(
+            localStorage.getItem("bs_coin_requests") || "[]"
+          );
+          if (
+            !reqs.find(
+              (r) =>
+                r.username === state.user.username && r.status === "pending"
+            )
+          ) {
+            reqs.push({
+              id: Date.now(),
+              username: state.user.username,
+              status: "pending",
+            });
+            localStorage.setItem("bs_coin_requests", JSON.stringify(reqs));
+          } else {
+            alert("You already have a pending request.");
+          }
+        }
+      }
+
+      function updateUI() {
+        document.getElementById("ui-wallet").innerText = Math.floor(
+          state.wallet
+        ).toLocaleString();
+        document.getElementById("ui-win").innerText = state.currentSpinWin; // <-- FIX
+        document.getElementById("ui-stage").innerText = "Stage " + state.stage;
+        document.getElementById("ui-loc").innerText =
+          state.stage > 10
+            ? "Hell Gate"
+            : state.stage > 5
+            ? "Autumn Woods"
+            : "Spring Fields";
+        document
+          .getElementById("ui-bonus-msg")
+          .classList.toggle("hidden", !state.bonusActive);
+        if (state.bonusActive)
+          document.getElementById("ui-bonus-spins").innerText =
+            state.bonusSpins;
+      }
+
+      function saveData() {
+        if (!state.user) return; // Don't save if not logged in
+
+        // Update state object before saving
+        state.user.coins = state.wallet;
+        state.user.stage = state.stage;
+        state.user.enemyHP = state.enemyHp > 0 ? Math.ceil(state.enemyHp) : -1; // <-- FIX
+        state.user.totalDamage = state.totalDamage; // <-- FIX
+        state.user.highestCombo = state.highestCombo; // <-- FIX
+
+        if (USE_PHP_BACKEND) {
+          // Asynchronously save to server, don't need to wait for it
+          apiCall("save", {
+            username: state.user.username,
+            coins: state.wallet,
+            stage: state.stage,
+            enemyHP: state.user.enemyHP, // <-- FIX
+            totalDamage: state.user.totalDamage, // <-- FIX
+            highestCombo: state.user.highestCombo, // <-- FIX
+          });
+        } else {
+          // LocalStorage Fallback
+          let db = JSON.parse(localStorage.getItem("bs_users"));
+          if (db[state.user.username]) {
+            db[state.user.username] = state.user;
+            localStorage.setItem("bs_users", JSON.stringify(db));
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
