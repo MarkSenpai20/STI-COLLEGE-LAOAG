@@ -58,6 +58,18 @@ if ($conn->connect_error) {
  * ON DELETE CASCADE
  * );
  *
+ *
+ * -- NEW TABLE: For storing fixed products (SKUs) --
+ *
+ * CREATE TABLE products (
+ * id INT AUTO_INCREMENT PRIMARY KEY,
+ * item_name VARCHAR(255) NOT NULL UNIQUE,
+ * price_per_item DECIMAL(10, 2) NOT NULL,
+ * date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ * );
+ *
  */
 
 ?>
+
+
