@@ -61,6 +61,144 @@ switch ($action) {
         header('Location: index.php');
         exit;
 
+    // --- SEARCH FOR PRODUCTS (AJAX) ---
+    case 'search_products':
+        header('Content-Type: application/json');
+        $term = $_GET['term'] ?? '';
+        
+        if (empty($term)) {
+            echo json_encode([]);
+            exit;
+        }
+
+        try {
+            // Use a wildcard search
+            $search_term = "%" . $term . "%";
+            $stmt = $conn->prepare("SELECT id, item_name, price_per_item FROM products WHERE item_name LIKE ? LIMIT 10");
+            $stmt->bind_param("s", $search_term);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $products = $result->fetch_all(MYSQLI_ASSOC);
+            
+            echo json_encode($products);
+
+        } catch (mysqli_sql_exception $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        exit;
+
+    // --- MANAGE PRODUCTS (Create, Read, Delete - AJAX) ---
+    case 'manage_products':
+        header('Content-Type: application/json');
+        
+        // GET: Fetch all products
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            try {
+                $result = $conn->query("SELECT id, item_name, price_per_item FROM products");
+                $products = $result->fetch_all(MYSQLI_ASSOC);
+                echo json_encode($products);
+            } catch (mysqli_sql_exception $e) {
+                echo json_encode(['error' => $e->getMessage()]);
+            }
+        }
+        
+        // POST: Add a new product
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['item_name']) && isset($_POST['item_price'])) {
+                $name = trim($_POST['item_name']);
+                $price = (float)$_POST['item_price'];
+                
+                try {
+                    $stmt = $conn->prepare("INSERT INTO products (item_name, price_per_item) VALUES (?, ?)");
+                    $stmt->bind_param("sd", $name, $price);
+                    $stmt->execute();
+                    
+                    $new_id = $conn->insert_id;
+                    echo json_encode([
+                        'id' => $new_id,
+                        'item_name' => $name,
+                        'price_per_item' => $price
+                    ]);
+                } catch (mysqli_sql_exception $e) {
+                    echo json_encode(['error' => 'Failed to add product. Is the name unique?']);
+                }
+            } else {
+                echo json_encode(['error' => 'Invalid data']);
+            }
+        }
+        
+        // DELETE: Remove a product
+        if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $id = $_GET['id'] ?? 0;
+            if ($id > 0) {
+                try {
+                    $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                    
+                    if ($stmt->affected_rows > 0) {
+                        echo json_encode(['success' => true]);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Product not found']);
+                    }
+                } catch (mysqli_sql_exception $e) {
+                    echo json_encode(['error' => $e->getMessage()]);
+                }
+            }
+        }
+        exit;
+
+    // --- EXPORT PRODUCTS ---
+    case 'export_products':
+        try {
+            $result = $conn->query("SELECT item_name, price_per_item FROM products");
+            $products = $result->fetch_all(MYSQLI_ASSOC);
+            
+            $filename = "kahera_products_" . date("Y-m-d") . ".json";
+            
+            header('Content-Type: application/json');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            
+            echo json_encode($products, JSON_PRETTY_PRINT);
+
+        } catch (mysqli_sql_exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        exit;
+
+    // --- IMPORT PRODUCTS ---
+    case 'import_products':
+        if (isset($_FILES['import_file']) && $_FILES['import_file']['error'] == 0) {
+            $tmp_name = $_FILES['import_file']['tmp_name'];
+            $file_content = file_get_contents($tmp_name);
+            $products = json_decode($file_content, true);
+
+            if (is_array($products)) {
+                $conn->begin_transaction();
+                try {
+                    $stmt = $conn->prepare("INSERT INTO products (item_name, price_per_item) VALUES (?, ?) ON DUPLICATE KEY UPDATE price_per_item = VALUES(price_per_item)");
+                    
+                    foreach ($products as $product) {
+                        if (isset($product['item_name']) && isset($product['price_per_item'])) {
+                            $stmt->bind_param("sd", $product['item_name'], $product['price_per_item']);
+                            $stmt->execute();
+                        }
+                    }
+                    $conn->commit();
+                    header('Location: products.php?import=success');
+                    exit;
+
+                } catch (mysqli_sql_exception $e) {
+                    $conn->rollback();
+                    header('Location: products.php?import=error');
+                    exit;
+                }
+            }
+        }
+        // Fallback for error
+        header('Location: products.php?import=error');
+        exit;
+
     // --- COMPLETE PAYMENT & SAVE TO SQL DATABASE ---
     case 'complete_payment':
         if (
@@ -127,3 +265,5 @@ switch ($action) {
         exit;
 }
 ?>
+
+
