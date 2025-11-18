@@ -63,6 +63,7 @@ $total = 0;
                 <a href="add_item.php" class="btn">ADD</a>
             </div>
             
+            <a href="products.php" class="btn btn-full">MANAGE PRODUCTS</a>
             <a href="api.php?action=clear" class="btn btn-full">CLEAR ITEM LIST</a>
 
             <!-- Status Message Area -->
@@ -83,3 +84,5 @@ $total = 0;
     <script src="main.js"></script>
 </body>
 </html>
+
+
