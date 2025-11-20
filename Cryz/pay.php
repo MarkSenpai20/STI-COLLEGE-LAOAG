@@ -25,10 +25,10 @@ foreach ($cart as $item) {
 <body>
 
     <div class="app-container">
-        <header class="app-header">
-            <h1>Payment</h1>
+        <header class="app-header"><br><br>
+            <!-- <h1>Payment</h1> -->
         </header>
-
+<hr id="hr_1"><br id="breakLine"><hr>
         <main class="app-main">
             <!-- 
                 This form will submit the final transaction to api.php

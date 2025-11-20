@@ -24,10 +24,10 @@ if (isset($_GET['import'])) {
 <body>
 
     <div class="app-container">
-        <header class="app-header">
-            <h1>Manage Products</h1>
+        <header class="app-header"><br><br>
+            <!-- <h1>Manage Products</h1> -->
         </header>
-
+<hr id="hr_1"><br id="breakLine"><hr>
         <main class="app-main">
             <!-- Back to Main App -->
             <a href="index.php" class="btn btn-full" style="margin-bottom: 1rem;">Back to POS</a>

@@ -3,36 +3,64 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* Unified Background: Always use the app's gray color */
+    background-color: #ebd8fd; 
     min-height: 100vh;
     color: #333;
+    /* Removed flex centering and dark background for desktop */
 }
 
-/* --- App Container --- */
+/* --- App Container (Unified Full Screen) --- */
 .app-container {
     width: 100%;
-    max-width: 400px;
-    height: 85vh;
-    max-height: 800px;
-    background-color: #E5E7EB; /* kahera-gray */
-    border-radius: 1.5rem; /* 2xl */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    height: 100vh; /* Full viewport height */
+    height: 100dvh; /* Dynamic Viewport Height */
+    background-color: #ebd8fd; /* kahera-gray */
+    
+    /* Removed max-width, borders, and shadows to create full-screen kiosk feel */
+    border-radius: 0;
+    box-shadow: none;
+    
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
+}
+hr{
+    margin: auto;
+    width: 75%;
+    color: #b064f7;
 }
 
+#hr_1{
+    width: 100%;
+}
+
+/* --- Header --- */
 .app-header {
-    background-color: #fff;
+    background-color: #ebd8fd; /* Fallback color if image fails to load */
+    
+    /* 1. Set the image */
+    background-image: url('appLogo.png');
+    
+    /* 2. Prevent it from repeating (tiling) */
+    background-repeat: no-repeat;
+    
+    /* 3. Center it */
+    background-position: center;
+    
+    /* 4. Size it */
+    /* 'contain' = shows whole image. 'cover' = fills area but might crop. '100px' = specific size. */
+    background-size: 50%; 
+    
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    z-index: 10;
 }
 
 .app-header h1 {
@@ -42,10 +70,14 @@ body {
     color: #111827;
 }
 
+
 .app-main {
     padding: 1.25rem;
     flex-grow: 1;
     overflow-y: auto;
+    /* Smooth scrolling for touch devices */
+    -webkit-overflow-scrolling: touch; 
+    background-color: #ebd8fd;
 }
 
 /* --- Item List --- */
@@ -54,7 +86,8 @@ body {
     border-radius: 0.5rem;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
     margin-bottom: 1rem;
-    height: 250px;
+    /* Fixed height for the list, though you could use flex-grow if you prefer dynamic height */
+    height: 250px; 
     display: flex;
     flex-direction: column;
 }
@@ -91,24 +124,23 @@ body {
     cursor: pointer;
 }
 .item-row.void-selectable:hover {
-    background-color: #fef2f2; /* light red */
+    background-color: #fef2f2;
 }
 .item-row.item-selected {
     background-color: #FEE2E2;
     border-color: #EF4444;
-    ring: 2px solid #EF4444; /* (use border for this) */
+    ring: 2px solid #EF4444;
     border-left: 4px solid #EF4444;
     font-weight: 600;
 }
-
 
 /* --- Buttons --- */
 .btn {
     display: inline-block;
     width: 100%;
-    padding: 0.75rem 1rem;
-    background-color: #D1D5DB; /* kahera-button */
-    color: #374151; /* kahera-dark */
+    padding: 0.875rem 1rem;
+    background-color: #b064f7;
+    color: #374151;
     font-size: 1rem;
     font-weight: 600;
     text-align: center;
@@ -118,14 +150,16 @@ body {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: all 0.15s ease-in-out;
+    user-select: none; 
 }
 
 .btn:hover {
-    background-color: #9CA3AF;
+    background-color: #58327c;
+    color: white;
 }
 
 .btn:active {
-    transform: scale(0.97);
+    transform: scale(0.99); /* Subtle click effect */
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -173,11 +207,12 @@ body {
 
 .form-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1rem;
     font-size: 1rem;
     border: 1px solid #D1D5DB;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    -webkit-appearance: none;
 }
 
 .form-input:focus {
@@ -190,7 +225,7 @@ body {
     font-size: 0.875rem;
     font-weight: 600;
     color: #4B5563;
-    margin-bottom: -0.5rem; /* Pulls it closer to the input */
+    margin-bottom: -0.5rem;
     display: block;
 }
 
@@ -267,7 +302,7 @@ body {
     color: #EF4444;
     font-weight: 500;
     margin-bottom: 1rem;
-    height: 1.5rem; /* Reserve space */
+    height: 1.5rem;
 }
 
 .status-message.success {
@@ -278,7 +313,7 @@ body {
     display: none;
 }
 
-/* --- Product Management Page (products.php) --- */
+/* --- Product Management & Search --- */
 .product-manage-list {
     background-color: #fff;
     border-radius: 0.5rem;
@@ -300,15 +335,12 @@ body {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 30px;
     text-align: center;
     cursor: pointer;
-}
-.btn-delete-product:hover {
-    background: #DC2626;
 }
 
 .import-export-container {
@@ -326,7 +358,6 @@ body {
     border-radius: 0.5rem;
 }
 
-/* --- Product Search (add_item.php) --- */
 .product-search-container {
     position: relative;
     margin-bottom: 1.5rem;
@@ -344,8 +375,8 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     max-height: 200px;
     overflow-y: auto;
-    z-index: 10;
-    display: none; /* Hidden by default */
+    z-index: 20;
+    display: none;
 }
 
 .search-results-container.active {
@@ -353,21 +384,7 @@ body {
 }
 
 .search-result-item {
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     cursor: pointer;
     border-bottom: 1px solid #f3f4f6;
 }
-.search-result-item:hover {
-    background-color: #f3f4f6;
-}
-.search-result-item:last-child {
-    border-bottom: none;
-}
-
-.search-result-empty {
-    padding: 0.75rem 1rem;
-    color: #6B7280;
-    font-style: italic;
-}
-
-

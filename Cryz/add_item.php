@@ -13,10 +13,10 @@ session_start();
 <body>
 
     <div class="app-container">
-        <header class="app-header">
-            <h1>Add New Item</h1>
+        <header class="app-header"><br><br>
+            <!-- <h1>Add New Item</h1> -->
         </header>
-
+<hr id="hr_1"><br id="breakLine"><hr>
         <main class="app-main">
             <!-- 
                 This form POSTs the data to api.php.
@@ -25,7 +25,7 @@ session_start();
 
             <!-- New Product Search -->
             <div class="product-search-container">
-                <label for="product-search" class="form-label">Search Fixed Products:</label>
+                <label for="product-search" class="form-label">Search Fixed Products:</label><br>
                 <input type="search" id="product-search" placeholder="Type to search..." class="form-input" autocomplete="off">
                 <div id="search-results" class="search-results-container">
                     <!-- Search results will be injected by add_item.js -->
