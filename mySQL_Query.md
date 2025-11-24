@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS `attendance_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Create a dedicated user named 'teacher' with password 'sti123'
-CREATE USER 'teacher'@'localhost' IDENTIFIED BY 'school123';
+CREATE USER 'teacher'@'localhost' IDENTIFIED BY 'sti123';
 GRANT ALL PRIVILEGES ON school_db.* TO 'teacher'@'localhost';
 FLUSH PRIVILEGES;
 
+-- Other user acc: 'admin' : '1234'
