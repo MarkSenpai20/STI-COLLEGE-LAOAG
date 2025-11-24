@@ -23,4 +23,4 @@ CREATE USER 'teacher'@'localhost' IDENTIFIED BY 'sti123';
 GRANT ALL PRIVILEGES ON school_db.* TO 'teacher'@'localhost';
 FLUSH PRIVILEGES;
 
--- Other user acc: 'admin' : '1234'
+-- Other user acc: 'admin' : '1234' 
