@@ -1,7 +1,6 @@
 <?php
 date_default_timezone_set('Asia/Manila'); 
 
-// CONNECT TO USER HOST CREATED FROM THE PRIVILEGES
 $host = "127.0.0.1";
 $user = "teacher"; 
 $pass = "sti123"; 
@@ -9,27 +8,22 @@ $dbname = "school_db";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
-// Error Handling
 if ($conn->connect_error) {
      die("Database Error: " . $conn->connect_error);
 }
 
-// Get server State JSON FILE for Students Perspective
 $stateFile = 'server_state.json';
 
-// Get Host Server IP
 function getServerIP() {
     return gethostbyname(gethostname());
 }
 
-// Modify the server state mode
 function setServerState($mode, $className) {
     global $stateFile;
     $data = ["mode" => $mode, "class" => $className];
     file_put_contents($stateFile, json_encode($data));
 }
 
-// Then reads the server state
 function getServerState() {
     global $stateFile;
     if (!file_exists($stateFile)) return ["mode" => "IDLE", "class" => "None"];
@@ -169,19 +163,28 @@ if (isset($_GET['action'])) {
         exit;
     }
 
-    // 8. EXPORT CSV
+    // 8. EXPORT CSV (UPDATED LOGIC)
     if ($action == 'export') {
         $class = $_GET['class'];
-        $date = $_GET['date'];
+        $type = $_GET['type'] ?? ''; // 'registered' or 'attendance'
+        $date = $_GET['date'] ?? date('Y-m-d'); // Default to today
+        
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="Attendance_' . $class . '_' . $date . '.csv"');
+        header('Content-Disposition: attachment; filename="Export_' . $class . '_' . $date . '.csv"');
+        
         $output = fopen('php://output', 'w');
-        fputcsv($output, ['Student Name', 'Student ID', 'Time / Status']);
 
-        if ($date == 'REGISTER_MODE') {
+        // LOGIC: If type 'registered', we dump STUDENTS table.
+        // Otherwise, we dump ATTENDANCE_LOGS table.
+        
+        if ($type == 'registered') {
+             // Export Class Identity List
+             fputcsv($output, ['Student Name', 'Student ID', 'Status']);
              $res = $conn->query("SELECT student_name, student_id FROM students WHERE class_name = '$class'");
              while($row = $res->fetch_assoc()) fputcsv($output, [$row['student_name'], $row['student_id'], 'Registered Identity']);
         } else {
+             // Export Daily Log (Attendance)
+             fputcsv($output, ['Student Name', 'Student ID', 'Time In']);
              $res = $conn->query("SELECT student_name, student_id, timestamp FROM attendance_logs WHERE class_name = '$class' AND session_date = '$date'");
              while($row = $res->fetch_assoc()) fputcsv($output, [$row['student_name'], $row['student_id'], $row['timestamp']]);
         }
@@ -189,18 +192,16 @@ if (isset($_GET['action'])) {
         exit;
     }
 
-    // 9. CLEAR LIVE LIST (NEW FEATURE) under development
+    // 9. CLEAR LIVE LIST
     if ($action == 'clear_live') {
         $state = getServerState();
         $class = $state['class'];
         $date = date('Y-m-d');
 
         if ($state['mode'] == 'REGISTER') {
-            // DANGER: This deletes the registered students for this class!
             $conn->query("DELETE FROM students WHERE class_name = '$class'");
         } 
         elseif ($state['mode'] == 'ATTENDANCE') {
-            // This deletes today's attendance logs for this class
             $conn->query("DELETE FROM attendance_logs WHERE class_name = '$class' AND session_date = '$date'");
         }
         echo json_encode(["status" => "success"]);

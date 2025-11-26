@@ -1,5 +1,5 @@
 <?php 
-include 'db_connect.php'; // acting API for communication to the SQL server
+include 'db_connect.php'; 
 $ip = gethostbyname(gethostname()); 
 $current_folder = dirname($_SERVER['PHP_SELF']);
 ?>
@@ -20,7 +20,7 @@ $current_folder = dirname($_SERVER['PHP_SELF']);
         
         <div class="input-group">
             <label>Current Class Name</label>
-            <input type="text" id="className" placeholder="e.g. Physics 101" value="Physics 101">
+            <input type="text" id="className" placeholder="e.g. Physics 101" value="Students">
         </div>
 
         <div class="action-buttons">
@@ -58,7 +58,7 @@ $current_folder = dirname($_SERVER['PHP_SELF']);
             <div class="count-badge" id="liveCount">0</div>
         </div>
         
-        <div class="table-container bg-img">
+        <div class="table-container">
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -70,7 +70,7 @@ $current_folder = dirname($_SERVER['PHP_SELF']);
                 </thead>
                 <tbody id="liveTableBody"></tbody>
             </table>
-            <!-- NEW CLEAR BUTTON -->
+            <!-- CLEAR BUTTON -->
             <div class="btnClr">Clear List</div>
         </div>
     </div>
@@ -104,16 +104,13 @@ $current_folder = dirname($_SERVER['PHP_SELF']);
 <script>
 let currentMode = 'IDLE';
 
-// --- NEW CLEAR FUNCTION ---
-// We attach the click event listener here
+// CLEAR FUNCTION
 document.querySelector('.btnClr').onclick = clrClick;
-
 function clrClick() {
     if (currentMode === 'IDLE') {
         alert("Server is Idle. Nothing to clear.");
         return;
     }
-
     let warning = "Are you sure you want to clear this list?\n";
     if (currentMode === 'REGISTER') warning += "⚠️ WARNING: This will DELETE all registered student identities for this class!";
     if (currentMode === 'ATTENDANCE') warning += "This will reset today's attendance log for this class.";
@@ -123,7 +120,7 @@ function clrClick() {
         .then(res => res.json())
         .then(data => {
             alert("List has been cleared.");
-            fetchLiveData(); // Refresh immediately
+            fetchLiveData(); 
         });
     }
 }
@@ -191,7 +188,10 @@ function openHistory(className, date) {
     const exportBtn = document.getElementById('modalExportBtn');
 
     title.innerText = `${className} (${date})`;
-    exportBtn.onclick = function() { window.location.href = `db_connect.php?action=export&class=${className}&date=${date}`; };
+    // Logic for history export (defaults to attendance type for past dates)
+    exportBtn.onclick = function() { 
+        window.location.href = `db_connect.php?action=export&class=${className}&date=${date}&type=attendance`; 
+    };
 
     fetch(`db_connect.php?action=get_history_details&class=${className}&date=${date}`)
     .then(res => res.json())
@@ -216,11 +216,22 @@ function uploadCSV() {
     fetch('db_connect.php?action=import', { method: 'POST', body: fd }).then(res => res.json()).then(data => { alert("Imported " + data.count + " students!"); });
 }
 
+// --- UPDATED EXPORT FUNCTION ---
 function exportCurrent() {
     const className = document.getElementById('className').value;
     if(!className) return alert("Enter Class Name!");
-    let dateParam = currentMode === 'REGISTER' ? 'REGISTER_MODE' : new Date().toISOString().slice(0, 10);
-    window.location.href = `db_connect.php?action=export&class=${className}&date=${dateParam}`;
+
+    // If IDLE, we don't know what list they want
+    if(currentMode === 'IDLE') {
+        alert("Please START a mode (Register or Sign In) first, so I know which list to export.");
+        return;
+    }
+
+    // Determine Type based on Active Mode
+    let type = (currentMode === 'REGISTER') ? 'registered' : 'attendance';
+    
+    // Trigger Download
+    window.location.href = `db_connect.php?action=export&class=${className}&type=${type}`;
 }
 
 setInterval(fetchLiveData, 2000);

@@ -34,7 +34,7 @@
         <p>Enter your ID to sign in.</p>
         <form onsubmit="submitForm(event, 'ATTENDANCE')">
             <input type="text" id="att_id" placeholder="Student ID" required>
-            <button type="submit" class="btn-green">PRESENT!</button>
+            <button type="submit" class="btn-green">I am Here</button>
         </form>
     </div>
 
