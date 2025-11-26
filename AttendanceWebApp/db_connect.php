@@ -1,29 +1,35 @@
 <?php
 date_default_timezone_set('Asia/Manila'); 
 
+// CONNECT TO USER HOST CREATED FROM THE PRIVILEGES
 $host = "127.0.0.1";
-$user = "admin"; 
-$pass = "12345"; 
+$user = "teacher"; 
+$pass = "sti123"; 
 $dbname = "school_db";
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
+// Error Handling
 if ($conn->connect_error) {
      die("Database Error: " . $conn->connect_error);
 }
 
+// Get server State JSON FILE for Students Perspective
 $stateFile = 'server_state.json';
 
+// Get Host Server IP
 function getServerIP() {
     return gethostbyname(gethostname());
 }
 
+// Modify the server state mode
 function setServerState($mode, $className) {
     global $stateFile;
     $data = ["mode" => $mode, "class" => $className];
     file_put_contents($stateFile, json_encode($data));
 }
 
+// Then reads the server state
 function getServerState() {
     global $stateFile;
     if (!file_exists($stateFile)) return ["mode" => "IDLE", "class" => "None"];
@@ -183,7 +189,7 @@ if (isset($_GET['action'])) {
         exit;
     }
 
-    // 9. CLEAR LIVE LIST (NEW FEATURE)
+    // 9. CLEAR LIVE LIST (NEW FEATURE) under development
     if ($action == 'clear_live') {
         $state = getServerState();
         $class = $state['class'];

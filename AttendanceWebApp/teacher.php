@@ -1,5 +1,5 @@
 <?php 
-include 'db_connect.php'; 
+include 'db_connect.php'; // acting API for communication to the SQL server
 $ip = gethostbyname(gethostname()); 
 $current_folder = dirname($_SERVER['PHP_SELF']);
 ?>
