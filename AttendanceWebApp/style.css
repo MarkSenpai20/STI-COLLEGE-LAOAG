@@ -42,7 +42,8 @@ button { width: 100%; padding: 12px; border: none; border-radius: 5px; cursor: p
 .live-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; flex-shrink: 0; }
 .count-badge { font-size: 40px; font-weight: bold; color: var(--green); }
 
-.table-container { flex: 1; overflow-y: auto; background: var(--dark); border-radius: 10px; position: relative; }
+.bg-img { background: url(logo.png); background-size: 50%; }
+.table-container { flex: 1; overflow-y: auto; border-radius: 10px; position: relative; }
 .styled-table { width: 100%; border-collapse: collapse; }
 .styled-table th, .styled-table td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
 .styled-table th { position: sticky; top: 0; background: #222; color: #aaa; z-index: 2; }
