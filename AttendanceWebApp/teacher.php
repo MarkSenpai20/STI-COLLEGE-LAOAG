@@ -58,7 +58,7 @@ $current_folder = dirname($_SERVER['PHP_SELF']);
             <div class="count-badge" id="liveCount">0</div>
         </div>
         
-        <div class="table-container">
+        <div class="table-container bg-img">
             <table class="styled-table">
                 <thead>
                     <tr>
