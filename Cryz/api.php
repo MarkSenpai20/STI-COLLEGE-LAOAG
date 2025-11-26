@@ -2,11 +2,11 @@
 // ALWAYS start session at the top
 session_start();
 
-// Include the database connection file
+// Include database connection file
 require_once 'db.php';
 
 // Determine the action
-// We check GET for 'action' first, then POST
+// We check GET for 'action' first then POST
 $action = $_REQUEST['action'] ?? '';
 
 switch ($action) {
@@ -35,20 +35,20 @@ switch ($action) {
         if (isset($_GET['id'])) {
             $index_to_remove = (int)$_GET['id'];
             
-            // Check if that index exists in the cart
+            // Check if index exists in cart
             if (isset($_SESSION['cart'][$index_to_remove])) {
-                // Remove the item
+                // Remove item
                 unset($_SESSION['cart'][$index_to_remove]);
                 
-                // Re-index the array to prevent holes
+                // Re-index array to prevent holes
                 $_SESSION['cart'] = array_values($_SESSION['cart']);
                 
-                // Send a success JSON response for our JavaScript
+                // Send success JSON response for our JavaScript
                 echo json_encode(['success' => true]);
                 exit;
             }
         }
-        // Send a failure response if 'id' was missing or invalid
+        // Send failure response if 'id' missing or invalid
         echo json_encode(['success' => false, 'message' => 'Invalid item ID']);
         exit;
 
@@ -212,16 +212,16 @@ switch ($action) {
             $change = (float)$_POST['change_given'];
             $cart = $_SESSION['cart'];
             
-            // Use a database transaction
+            // Use database transaction
             $conn->begin_transaction();
             
             try {
-                // 1. Insert into 'transactions' table
+                // 1. Insert into transactions table
                 $stmt = $conn->prepare("INSERT INTO transactions (total_amount, amount_paid, change_given) VALUES (?, ?, ?)");
                 $stmt->bind_param("ddd", $total, $paid, $change);
                 $stmt->execute();
                 
-                // Get the ID of the transaction we just inserted
+                // Get ID of the transaction we inserted
                 $transaction_id = $conn->insert_id;
                 
                 // 2. Prepare statement for inserting items
@@ -247,7 +247,7 @@ switch ($action) {
                 // If anything failed, roll back
                 $conn->rollback();
                 
-                // Handle the error (e.g., redirect with error message)
+                // Handle error (e.g., redirect with error message)
                 header('Location: pay.php?error=' . urlencode($exception->getMessage()));
                 exit;
             }

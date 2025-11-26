@@ -16,7 +16,7 @@ $total = 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaheraApp</title>
-    <!-- Link the external CSS file -->
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

@@ -9,9 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let searchTimeout;
 
-  /**
-   * Fetches products based on the search term
-   */
+  //  Fetches products based on the search term
   async function searchProducts(term) {
     if (term.length < 1) {
       searchResults.innerHTML = "";

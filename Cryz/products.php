@@ -1,7 +1,5 @@
 <?php
 session_start();
-// You can add logic here to check if user is admin, etc.
-// For now, we'll just show the page.
 
 // Check for import status messages
 $message = '';

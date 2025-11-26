@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const payForm = document.getElementById("pay-form");
   const completePaymentBtn = document.getElementById("btn-complete-payment");
 
-  // Get the total amount from the data attribute
+  // Get total amount from data attribute
   const totalToPay = parseFloat(displayToPay.dataset.total);
   let currentBalance = 0.0;
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (change < 0) {
       displayChange.classList.add("negative");
       displayChange.classList.remove("positive");
-      completePaymentBtn.classList.add("disabled"); // Disable payment if not enough
+      completePaymentBtn.classList.add("disabled"); // Disable payment when not enough
       completePaymentBtn.disabled = true;
     } else {
       displayChange.classList.remove("negative");
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Add click listener to all denomination buttons
+  // Add click listener to all calculator buttons
   document.querySelectorAll(".denomination").forEach((button) => {
     button.addEventListener("click", () => {
       const value = parseFloat(button.dataset.value);

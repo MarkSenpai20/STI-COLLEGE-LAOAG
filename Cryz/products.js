@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const newProductPrice = document.getElementById("new-product-price");
   const loadingMessage = document.getElementById("product-list-loading");
 
-  /**
-   * Renders a single product item in the list
+  /* Renders a single product item in the list
    */
   function renderProduct(product) {
     const productRow = document.createElement("div");
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
-   * Fetches all products from the API and renders them
+   * Fetches all products from API and renders them
    */
   async function loadProducts() {
     try {
@@ -57,8 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /**
-   * Handles the submission of the "Add Product" form
+  /* Handles submission of "Add Product" form
    */
   async function addProduct(event) {
     event.preventDefault();
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         productListContainer.querySelector(".item-row.empty");
       if (emptyMessage) emptyMessage.remove();
 
-      renderProduct(newProduct); // Add the new product to the list
+      renderProduct(newProduct); // Add new product to list
 
       // Clear form
       newProductName.value = "";
@@ -91,8 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /**
-   * Handles the click of a "Delete" button
+  /* Handles click of a "Delete" button
    */
   async function deleteProduct(event) {
     const productId = event.target.dataset.id;
@@ -114,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (result.success) {
-        // Remove the item from the DOM
+        // Remove item from DOM
         const row = event.target.closest(".product-manage-row");
         row.remove();
       } else {

@@ -31,8 +31,8 @@ foreach ($cart as $item) {
 <hr id="hr_1"><br id="breakLine"><hr>
         <main class="app-main">
             <!-- 
-                This form will submit the final transaction to api.php
-                The 'total_to_pay' is passed via a hidden input.
+                This form submits final transaction to api.php
+                The 'total_to_pay' is passed via hidden input.
                 The 'balance' (amount_paid) is set by JavaScript.
             -->
             <form action="api.php" method="POST" id="pay-form">
@@ -62,7 +62,7 @@ foreach ($cart as $item) {
                     Total Price: P<?php echo number_format($total_to_pay, 2); ?>
                 </div>
 
-                <!-- Denomination Buttons -->
+                <!-- calculator Buttons -->
                 <div class="denomination-grid">
                     <button type="button" class="btn denomination" data-value="1">1</button>
                     <button type="button" class="btn denomination" data-value="5">5</button>
@@ -77,10 +77,10 @@ foreach ($cart as $item) {
                 
                 <button type="button" id="btn-clear-balance" class="btn btn-red btn-full">Clear Balance</button>
                 
-                <!-- This button submits the form to save to the database -->
+                <!-- This button submits form to save to database -->
                 <button type="submit" id="btn-complete-payment" class="btn btn-green btn-full">Complete Payment</button>
 
-                <!-- "BACK" button is just a link back to the main page -->
+                <!-- "BACK" button just a link back to main page -->
                 <a href="index.php" class="btn btn-full">BACK</a>
             </form>
         </main>
