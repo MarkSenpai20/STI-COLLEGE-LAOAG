@@ -19,6 +19,9 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* CRITICAL: This forces the browser to print colors exactly as seen on screen */
+            -webkit-print-color-adjust: exact; 
+            print-color-adjust: exact; 
         }
 
         body {
@@ -44,24 +47,22 @@
 
         .hero-content {
             max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
         }
 
         .logo-container {
             width: 150px;
             height: 150px;
-            background: black;
+            background: transparent;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             box-shadow: 0 0 30px rgba(86, 49, 235, 0.5);
-            animation: float 3s ease-in-out infinite;
         }
 
         .logo-container img {
-            width: 120%;
+            width: 300%;
             height: auto;
         }
 
@@ -100,7 +101,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns for better PDF layout */
             gap: 30px;
         }
 
@@ -109,15 +110,8 @@
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(86, 49, 235, 0.2);
-            border-color: var(--primary);
         }
 
         .icon {
@@ -139,10 +133,11 @@
         /* TECH STACK */
         .tech-stack {
             text-align: center;
-            padding: 60px 0;
+            padding: 40px 0;
             background: rgba(255,255,255,0.02);
             margin-top: 40px;
             border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .tech-badges {
@@ -160,6 +155,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             border: 1px solid rgba(255,255,255,0.2);
+            color: white; /* Force white text for PDF */
         }
 
         .badge.php { color: #8892be; border-color: #8892be; }
@@ -173,12 +169,12 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            margin-top: 80px;
+            margin-top: 60px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             border-radius: 20px;
-            padding: 50px;
+            padding: 40px;
             color: white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            break-inside: avoid; /* Keeps this section together on one page if possible */
         }
 
         .cta-text {
@@ -186,13 +182,9 @@
             min-width: 300px;
         }
 
-        .cta-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
         .steps {
             list-style: none;
+            margin-top: 20px;
         }
 
         .steps li {
@@ -215,36 +207,28 @@
             margin-right: 15px;
         }
 
-        /* ANIMATIONS */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             color: var(--text-gray);
             font-size: 0.9rem;
             border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
-        /* PRINT MEDIA QUERY (If you print this on paper) */
+        /* PRINT SETTINGS (PDF OPTIMIZED) */
         @media print {
-            body { background: white; color: black; }
-            header { background: white; color: black; clip-path: none; min-height: auto; border-bottom: 2px solid #5631eb; }
-            .feature-card { border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
-            h1, h2, h3 { color: #5631eb; }
-            .how-it-works { background: #f0f0f0; color: black; break-inside: avoid; }
-            .tagline { color: #555; }
-            p { color: #333; }
+            body {
+                background-color: var(--darker) !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .feature-card {
+                break-inside: avoid;
+            }
+            @page {
+                margin: 0;
+                size: auto;
+            }
         }
     </style>
 </head>
@@ -253,7 +237,6 @@
     <header>
         <div class="hero-content">
             <div class="logo-container">
-                <!-- Ensure logo.png is in the same folder as this HTML file -->
                 <img src="logo.png" alt="AWA Logo">
             </div>
             <h1>AWA</h1>
@@ -272,73 +255,61 @@
         </div>
 
         <div class="features-grid">
-            <!-- Feature 1 -->
             <div class="feature-card">
                 <span class="icon">🚀</span>
                 <h3>Lightning Fast</h3>
-                <p>Say goodbye to long roll calls. Students sign in simultaneously using their own devices in seconds.</p>
+                <p>Students sign in simultaneously using their own devices in seconds.</p>
             </div>
-
-            <!-- Feature 2 -->
             <div class="feature-card">
                 <span class="icon">📡</span>
-                <h3>No Internet Required</h3>
-                <p>Runs entirely on Localhost (LAN). No expensive servers or unstable internet connections needed.</p>
+                <h3>No Internet</h3>
+                <p>Runs entirely on Localhost (LAN). No expensive servers required.</p>
             </div>
-
-            <!-- Feature 3 -->
             <div class="feature-card">
                 <span class="icon">📊</span>
-                <h3>Real-Time Data</h3>
-                <p>Teachers see attendance updates live on the dashboard as students mark themselves present.</p>
+                <h3>Real-Time</h3>
+                <p>Teachers see attendance updates live on the dashboard.</p>
             </div>
-
-            <!-- Feature 4 -->
             <div class="feature-card">
                 <span class="icon">💾</span>
                 <h3>Easy Export</h3>
-                <p>Generate CSV reports instantly for grading sheets or administrative records.</p>
+                <p>Generate CSV reports instantly for grading sheets.</p>
             </div>
-
-            <!-- Feature 5 -->
             <div class="feature-card">
                 <span class="icon">📱</span>
                 <h3>Mobile First</h3>
-                <p>Designed with a responsive UI that works perfectly on smartphones, tablets, and laptops.</p>
+                <p>Responsive UI that works on smartphones and laptops.</p>
             </div>
-
-             <!-- Feature 6 -->
              <div class="feature-card">
                 <span class="icon">🛡️</span>
-                <h3>Secure Identity</h3>
-                <p>Prevents proxy attendance by locking student IDs to the local class session.</p>
+                <h3>Secure</h3>
+                <p>Prevents proxy attendance by locking student IDs.</p>
             </div>
         </div>
 
         <div class="tech-stack">
             <h2>🛠️ Powered By</h2>
             <div class="tech-badges">
-                <div class="badge xampp">XAMPP Apache</div>
+                <div class="badge xampp">XAMPP</div>
                 <div class="badge php">PHP 8</div>
-                <div class="badge sql">MySQL Database</div>
-                <div class="badge html">HTML5 / CSS3</div>
-                <div class="badge">JavaScript (AJAX)</div>
+                <div class="badge sql">MySQL</div>
+                <div class="badge html">HTML5</div>
+                <div class="badge">AJAX</div>
             </div>
         </div>
 
         <div class="how-it-works">
             <div class="cta-text">
                 <h2>Try it Live!</h2>
-                <p style="margin-bottom: 20px; opacity: 0.9;">Join the session right now using your phone.</p>
                 <ul class="steps">
                     <li><span class="step-num">1</span> Connect to WiFi: <strong>"Hotspot Name"</strong></li>
-                    <li><span class="step-num">2</span> Open Browser: <strong>http://[Your-IP]/AttendanceWebApp</strong></li>
+                    <li><span class="step-num">2</span> Go to: <strong>http://[Your-IP]/AttendanceWebApp</strong></li>
                     <li><span class="step-num">3</span> Register & Mark Present!</li>
                 </ul>
             </div>
-            <!-- You can replace this with a real QR code image if you have one -->
-            <div style="background: white; padding: 20px; border-radius: 10px;">
-                <div style="width: 150px; height: 150px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #555; text-align: center; font-size: 0.8rem;">
+            <div style="background: white; padding: 20px; border-radius: 10px; margin-left: 20px;">
+                <!-- Replace with real QR -->
+                <div style="width: 120px; height: 120px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #555; text-align: center; font-size: 0.8rem;">
                     [QR Code Placeholder]
                 </div>
             </div>
@@ -347,8 +318,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Attendance Web App Project.</p>
-        <p>Developed by <strong>Mark Cruz</strong> | BSIT</p>
+        <p>&copy; 2025 Attendance Web App Project | Mark Cruz</p>
     </footer>
 
 </body>
