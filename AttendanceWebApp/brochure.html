@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AWA Trifold Brochure</title>
+    <style>
+        /* RESET & BASICS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        :root {
+            --primary: #5631eb;
+            --secondary: #33b5e5;
+            --dark: #1e1e2d;
+            --light: #f4f4f9;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ccc; /* Gray background for screen viewing */
+            font-size: 12pt;
+            color: var(--text-dark);
+        }
+
+        /* PAPER SHEET SETUP (A4 Landscape) */
+        .sheet {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr; /* 3 Columns */
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* PANELS */
+        .panel {
+            padding: 25px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* --- SIDE 1: OUTSIDE (Inside Flap | Back Cover | Front Cover) --- */
+        
+        /* Panel 1: Inside Flap (Tech Stack) */
+        .flap {
+            background: #f8f9fa;
+            border-right: 1px dashed #ddd; /* Fold line guide */
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* Panel 2: Back Cover (Contact/About) */
+        .back-cover {
+            background: var(--dark);
+            color: white;
+            border-right: 1px dashed #444; /* Fold line guide */
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* Panel 3: Front Cover */
+        .front-cover {
+            background: linear-gradient(135deg, var(--primary), #3a1eb8);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- SIDE 2: INSIDE (Problem | Solution | How It Works) --- */
+        
+        /* General Inside Panel Styling */
+        .inside-panel {
+            background: white;
+            border-right: 1px solid #eee; /* Fold line guide */
+        }
+        .inside-panel:last-child { border-right: none; }
+
+        /* TYPOGRAPHY & ELEMENTS */
+        h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 10px; }
+        h2 { font-size: 1.6rem; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--dark); font-weight: 700; }
+        p { margin-bottom: 15px; font-size: 0.95rem; line-height: 1.5; color: #555; }
+        
+        .back-cover p { color: #aaa; }
+        .front-cover p { color: #ddd; font-size: 1.1rem; }
+
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: black;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .logo-circle img { width: 120%; }
+
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tech-item {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .step-num {
+            background: var(--primary);
+            color: white;
+            min-width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            margin-top: 2px;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #f0f0ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            margin-top: auto;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body { background: white; }
+            .sheet { margin: 0; box-shadow: none; width: 100%; height: 100vh; page-break-after: always; }
+            /* Hide Fold Lines on print if desired, currently kept for guidance */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: OUTSIDE (Inside Flap | Back Cover | Front Cover) -->
+    <div class="sheet">
+        
+        <!-- PANEL 1: INSIDE FLAP (Tech Stack) -->
+        <div class="panel flap">
+            <h2>Under the Hood</h2>
+            <p>AWA runs entirely on a lightweight local server stack, ensuring speed and reliability without internet.</p>
+            
+            <div style="margin: 30px 0;">
+                <h3 style="color: #666;">The Stack</h3>
+                <div class="tech-grid">
+                    <span class="tech-item">XAMPP</span>
+                    <span class="tech-item">Apache</span>
+                    <span class="tech-item">PHP 8</span>
+                    <span class="tech-item">MySQL / MariaDB</span>
+                    <span class="tech-item">HTML5 / CSS3</span>
+                    <span class="tech-item">AJAX</span>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: white; border: 1px solid #eee;">
+                <h3>Did you know?</h3>
+                <p style="font-size: 0.85rem; margin: 0;">This entire system weighs less than 50MB and can run on any standard laptop acting as a server.</p>
+            </div>
+        </div>
+
+        <!-- PANEL 2: BACK COVER (About) -->
+        <div class="panel back-cover">
+            <h3>Developed By</h3>
+            <div style="width: 80px; height: 80px; background: #333; border-radius: 50%; margin: 15px auto; display:flex; align-items:center; justify-content:center; font-size:2rem;">👨‍💻</div>
+            <h3 style="color: white; margin-bottom: 5px;">Mark Jhon Angelo Cruz<br>Clyde Gaoiran<br>Lhyka Tabieros<br>Angel Tabios</h3>
+            <p style="color: var(--secondary);">BS Computer Science</p>
+            
+            <div style="margin-top: 40px; border-top: 1px solid #444; padding-top: 20px;">
+                <p><strong>Expo Project 2025</strong></p>
+                <p>Laoag City, Ilocos Region</p>
+                <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2025 Attendance Web App</p>
+            </div>
+        </div>
+
+        <!-- PANEL 3: FRONT COVER -->
+        <div class="panel front-cover">
+            <div class="logo-circle">
+                <img src="logo.png" alt="AWA">
+            </div>
+            <h1>AWA</h1>
+            <p style="font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;">Attendance Web App</p>
+            
+            <div style="border-top: 2px solid rgba(255,255,255,0.3); width: 50px; margin: 0 auto 20px;"></div>
+            
+            <p style="font-size: 1rem;">Fast. Paperless. Local.</p>
+        </div>
+
+    </div>
+
+    <!-- PAGE 2: INSIDE (Problem | Solution | How-to) -->
+    <div class="sheet">
+        
+        <!-- PANEL 1: THE PROBLEM -->
+        <div class="panel inside-panel">
+            <h2>The Problem</h2>
+            <img src="https://placehold.co/200x120/eee/999?text=Paper+Lists" alt="Paper" style="width:100%; border-radius: 8px; margin-bottom: 20px; opacity: 0.8;">
+            
+            <h3>🚫 Slow Roll Calls</h3>
+            <p>Calling names one by one eats up valuable instruction time (10-15 mins per class).</p>
+
+            <h3>🚫 Proxy Attendance</h3>
+            <p>Students signing in for friends is rampant with paper sheets passed around the room.</p>
+
+            <h3>🚫 Data Loss</h3>
+            <p>Paper sheets get lost, damaged, or are tedious to digitize for grading later.</p>
+        </div>
+
+        <!-- PANEL 2: THE SOLUTION -->
+        <div class="panel inside-panel">
+            <h2>The Solution</h2>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="font-size: 3rem;">⚡</span>
+            </div>
+
+            <h3>Local Network Speed</h3>
+            <p>By hosting on the LAN, we eliminate internet lag. 50 students can sign in simultaneously in under 10 seconds.</p>
+
+            <h3>Secure Identity</h3>
+            <p>The system validates Student IDs against a pre-registered class list database.</p>
+
+            <h3>Instant Reports</h3>
+            <p>Teachers can export a CSV file compatible with Excel immediately after class.</p>
+        </div>
+
+        <!-- PANEL 3: HOW IT WORKS -->
+        <div class="panel inside-panel">
+            <h2>How It Works</h2>
+            
+            <div class="step">
+                <div class="step-num">1</div>
+                <div>
+                    <strong>Teacher Starts Server</strong>
+                    <p style="font-size: 0.8rem; margin: 0;">Teacher opens the app on their laptop and creates a hotspot.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div>
+                    <strong>Students Connect</strong>
+                    <p style="font-size: 0.8rem; margin: 0;">Students join the WiFi and go to the local URL.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div>
+                    <strong>One-Tap Check-in</strong>
+                    <p style="font-size: 0.8rem; margin: 0;">Students enter their ID. The dashboard updates instantly.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Try it at our booth!</strong>
+                <p style="margin: 0; font-size: 0.9rem;">Scan the QR code to join the live demo session.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
