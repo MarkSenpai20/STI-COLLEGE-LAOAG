@@ -1,0 +1,2700 @@
+
+
+[
+    {
+        "item_name": "Nova Country Cheddar",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Nova Multigrain",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Piattos Cheese",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Piattos Sour Cream",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Piattos Roadhouse BBQ",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Piattos Roast Beef",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Piattos Nacho Pizza",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "V-Cut Spicy Barbeque",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "V-Cut Cheese",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "V-Cut Onion Garlic",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Mr. Chips Nacho Cheese",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Mr. Chips Beef",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "DingDong Mixed Nuts Original",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "DingDong Mixed Nuts Spicy",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "DingDong Snack Mix Green",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Boy Bawang Garlic",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Boy Bawang Chili Cheese",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Boy Bawang Adobo",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Boy Bawang Barbecue",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Boy Bawang Hot Garlic",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Chippy Red",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Chippy Blue",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Chippy Green",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Tortillos Cheese",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Tortillos BBQ",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Tortillos Sour Cream",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Roller Coaster Cheese",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Roller Coaster Potato",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Clover Chips Cheese Small",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Clover Chips BBQ Small",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Clover Chips Ham & Cheese",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Clover Chips Shrimp",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Clover Chips Large Cheese",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Oishi Prawn Crackers Original",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Oishi Prawn Crackers Spicy",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Oishi Ribbed Crackers",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Oishi Pillows Choco",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Oishi Pillows Ube",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Sponge Crunch Choco",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Sponge Crunch Cheese",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Loaded White Choco",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Loaded Hazelnut",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Stik-O Chocolate Jar",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Stik-O Strawberry Jar",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Super Crunch Corn Chips",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cheezy Corn Crunch",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Chiz Curls",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Nagaraya Cracker Nuts Original",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nagaraya Cracker Nuts Garlic",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nagaraya Cracker Nuts BBQ",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nagaraya Cracker Nuts Adobo",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nagaraya Cracker Nuts Hot & Spicy",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Growers Peanuts Garlic",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Growers Peanuts Savory Hot",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Sugargo Nuts",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Happy Peanuts",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Maxx Candy Honey Lemon",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Maxx Candy Cherry",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Maxx Candy Dalandan",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Maxx Candy Extra Strength",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Snowbear",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "XO Candy Coffee",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "XO Candy Caramel",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "XO Candy Chocolate",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Fres Candy Mint",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Fres Candy Grape",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Fres Candy Cherry",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Potchi Strawberry",
+        "price_per_item": "1.00"
+    },
+    {
+        "item_name": "Flat Tops (Pack)",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Curly Tops (Pack)",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Chocnut",
+        "price_per_item": "3.00"
+    },
+    {
+        "item_name": "Hany",
+        "price_per_item": "3.00"
+    },
+    {
+        "item_name": "Lala Chocolate",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Cloud 9 Classic",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cloud 9 Overload",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Cloud 9 White",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Nips Chocolate",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nips Peanut",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nips Milk Chocolate",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Beng-Beng",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Goya Bar Milk Chocolate",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Goya Bar Dark Chocolate",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Goya Bar Almonds",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Toblerone Tiny",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Cadbury Lickables",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Mentos Mint",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Mentos Fruit",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Mentos Grape",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Doublemint Stick",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Juicy Fruit Gum",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Judge Chewing Gum",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "V-Fresh",
+        "price_per_item": "1.50"
+    },
+    {
+        "item_name": "Halls Honey Lemon",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Halls Mentho-Lyptus",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Halls Cherry",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Trust Chocolate",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Trust Strawberry",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Trust Orange",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Trust Classic Natural",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Durex Featherlite",
+        "price_per_item": "280.00"
+    },
+    {
+        "item_name": "Durex Performa",
+        "price_per_item": "299.99"
+    },
+    {
+        "item_name": "Durex Invisible",
+        "price_per_item": "299.99"
+    },
+    {
+        "item_name": "Durex Pleasuremax",
+        "price_per_item": "280.00"
+    },
+    {
+        "item_name": "Durex Extra Safe",
+        "price_per_item": "280.00"
+    },
+    {
+        "item_name": "Premiere Condoms Classic",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Premiere Condoms Dotted",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Frenzy Condoms",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Sting Energy Drink Strawberry",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Sting Energy Drink Original",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Cobra Energy Drink Original",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Cobra Energy Drink Berry",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Cobra Energy Drink Smart",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Extra Joss",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Red Bull Bottle",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Red Bull Can",
+        "price_per_item": "75.00"
+    },
+    {
+        "item_name": "Gatorade Blue Bolt",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Gatorade Grape",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Gatorade Lemon Lime",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Pocari Sweat 500ml",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Coca-Cola Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Coca-Cola 500ml",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Coca-Cola 1.5L",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "Coca-Cola Zero Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Sprite Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Sprite 1.5L",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "Royal Tru Orange Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Royal Tru Orange 1.5L",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "Mountain Dew Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Mountain Dew 1.5L",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "7-Up Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Pepsi Blue Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Pepsi Regular Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Pepsi Black Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "RC Cola Mega",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "RC Cola 1.5L",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Root Beer Mug Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Root Beer Sarsi Mismo",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "C2 Apple 500ml",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "C2 Lemon 500ml",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "C2 Peach 500ml",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "C2 Apple 1L",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "C2 Lemon 1L",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Smart C Lemon",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Smart C Orange",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Smart C Pomelo",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Minute Maid Orange",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Minute Maid Mango",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Zest-O Orange (Box)",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Zest-O Mango (Box)",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Chuckie Chocolate Drink 180ml",
+        "price_per_item": "28.00"
+    },
+    {
+        "item_name": "Chuckie Chocolate Drink 250ml",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Choco Mucho Drink",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Dutch Mill Strawberry",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Dutch Mill Blueberry",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Dutch Mill Orange",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Dutch Mill Mixed Fruit",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Yakult",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Delight Probiotic",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Nescafe Original Can",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Nescafe Latte Can",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Nescafe Mocha Can",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Kopiko 78",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Kopiko Lucky Day",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nescafe Stick Original",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Nescafe Stick Creamy White",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Nescafe Stick Brown",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Kopiko Blanca Stick",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Kopiko Brown Stick",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Kopiko Black Stick",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Great Taste White Stick",
+        "price_per_item": "7.00"
+    },
+    {
+        "item_name": "Great Taste Original Stick",
+        "price_per_item": "7.00"
+    },
+    {
+        "item_name": "San Mig 3-in-1 Coffee",
+        "price_per_item": "7.00"
+    },
+    {
+        "item_name": "Milo Sachet 24g",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Ovaltine Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Bear Brand Swak Pack",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Birch Tree Fortified",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Alaska Powdered Milk Sachet",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Energen Vanilla",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Energen Chocolate",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Tang Orange Sachet",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Tang Pineapple Sachet",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Tang Grapes Sachet",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Eight O'Clock Orange",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Nestea Lemon Sachet",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Nestea Apple Sachet",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Lucky Me Pancit Canton Kalamansi",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lucky Me Pancit Canton Chilimansi",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lucky Me Pancit Canton Original",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lucky Me Pancit Canton Sweet Spicy",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lucky Me Pancit Canton Extra Hot",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lucky Me Beef Mami",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Lucky Me Chicken Mami",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Lucky Me Spicy Beef",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Lucky Me La Paz Batchoy",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Payless Xtra Big Pancit Canton Kalamansi",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Payless Xtra Big Pancit Canton Chilimansi",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Payless Xtra Big Pancit Canton Sweet Spicy",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Nissin Cup Noodles Beef",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nissin Cup Noodles Seafood",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nissin Cup Noodles Chicken",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nissin Cup Noodles Spicy Seafood",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nissin Cup Noodles Batchoy",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Nissin Yakisoba Spicy Chicken",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nissin Yakisoba Savory Beef",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Quickchow Beef",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Quickchow Chicken",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Ligo Sardines Red",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Ligo Sardines Green",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Mega Sardines Red",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Mega Sardines Green",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Mega Sardines Spicy",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "555 Sardines Red",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "555 Sardines Green",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Saba Mackerel",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Century Tuna Flakes in Oil",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Century Tuna Hot & Spicy",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Century Tuna Kalamansi",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "San Marino Corned Tuna",
+        "price_per_item": "38.00"
+    },
+    {
+        "item_name": "Argentina Corned Beef 150g",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Argentina Meat Loaf 150g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Purefoods Corned Beef 150g",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "CDO Karne Norte 150g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Maling Luncheon Meat",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Spam Luncheon Meat",
+        "price_per_item": "180.00"
+    },
+    {
+        "item_name": "Hunt's Pork and Beans",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Libby's Vienna Sausage",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Argentina Beef Loaf",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "SkyFlakes Crackers (Pack)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "SkyFlakes Condensada",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "SkyFlakes Fit",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Fita Crackers (Pack)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Magic Flakes Original",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Magic Flakes Cheese",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Magic Flakes Chocolate",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Rebisco Crackers Original",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Rebisco Crackers Honey Butter",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Rebisco Sandwich Choco",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Rebisco Sandwich Strawberry",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Rebisco Sandwich Cream",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Hansel Sandwich Mocha",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Hansel Sandwich Choco",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Hansel Sandwich Milk",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Bingo Cookies Chocolate",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Bingo Cookies Orange",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Cream-O Chocolate",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cream-O Vanilla",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Presto Creams Peanut Butter",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Presto Creams Vanilla",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Voice Crackers",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Dewberry Blueberry",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Dewberry Strawberry",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Combi",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Monde Mammon",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lemon Square Cheese Cake",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Fudgee Barr Chocolate",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Fudgee Barr Macapuno",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Fudgee Barr Mocha",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Fudgee Barr Durian",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Fudgee Barr Vanilla",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Quake Bar Choco",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Whatta Tops",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Bread Stix",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Eggnog Cookies",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Sun Silk Green Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Sun Silk Pink Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Sun Silk Orange Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Sun Silk Black Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Dove Shampoo Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Palmolive Green Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Palmolive Pink Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Palmolive Violet Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Rejoice Green Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Rejoice Rich Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Head & Shoulders Cool Menthol Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Head & Shoulders Lemon Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Head & Shoulders Apple Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Clear Men Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cream Silk Green Sachet",
+        "price_per_item": "9.00"
+    },
+    {
+        "item_name": "Cream Silk Pink Sachet",
+        "price_per_item": "9.00"
+    },
+    {
+        "item_name": "Cream Silk Blue Sachet",
+        "price_per_item": "9.00"
+    },
+    {
+        "item_name": "Cream Silk Gold Sachet",
+        "price_per_item": "9.00"
+    },
+    {
+        "item_name": "Safeguard White 60g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Safeguard Pink 60g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Safeguard Green 60g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Safeguard Lemon 60g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Bioderm Green",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Bioderm Pink",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Silka Papaya Soap",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Silka Green Papaya Soap",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Kojie San Soap Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Colgate Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Colgate Tube Small",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Close-Up Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Close-Up Tube Small",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Hapee Toothpaste Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Hapee Toothpaste Tube Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Listerine 60ml",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Rexona Sachet Men",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Rexona Sachet Women",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Rexona Roll-on Small",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Ariel Powder Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Tide Powder Sachet",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Surf Powder Sachet Cherry",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Surf Powder Sachet Purple",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Breeze Powder Sachet",
+        "price_per_item": "14.00"
+    },
+    {
+        "item_name": "Pride Bar Detergent",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Downy Sunrise Fresh Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Downy Antibac Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Downy Passion Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Downy Mystique Sachet",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Surf Fabric Conditioner Sachet",
+        "price_per_item": "7.00"
+    },
+    {
+        "item_name": "Joy Dishwashing Liquid Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Axion Dishwashing Paste",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Smart Dishwashing Paste",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Scotch Brite Sponge",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Steel Wool",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Zonrox Bleach Small",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Domex",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Mr. Muscle Toilet Cleaner",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Off Lotion Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Baygon Coil (Box)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Dragon Katol",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Marlboro Red (Pack)",
+        "price_per_item": "150.00"
+    },
+    {
+        "item_name": "Marlboro Gold (Pack)",
+        "price_per_item": "150.00"
+    },
+    {
+        "item_name": "Marlboro Black (Pack)",
+        "price_per_item": "140.00"
+    },
+    {
+        "item_name": "Fortune Red (Pack)",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Fortune Blue (Pack)",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Mighty Green (Pack)",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Mighty Red (Pack)",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Winston Red (Pack)",
+        "price_per_item": "120.00"
+    },
+    {
+        "item_name": "Camel Cigarettes",
+        "price_per_item": "110.00"
+    },
+    {
+        "item_name": "Cricket Lighter",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Disposal Lighter",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Red Horse Stallion",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Red Horse Litro",
+        "price_per_item": "110.00"
+    },
+    {
+        "item_name": "Red Horse Can",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "San Miguel Pale Pilsen Bottle",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "San Miguel Pale Pilsen Can",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "San Miguel Light Bottle",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "San Miguel Apple Flavor",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "San Miguel Lemon Flavor",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Tanduay Rhum Lapad",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Emperador Light 750ml",
+        "price_per_item": "120.00"
+    },
+    {
+        "item_name": "Emperador Double Light",
+        "price_per_item": "120.00"
+    },
+    {
+        "item_name": "GSM Blue 700ml",
+        "price_per_item": "110.00"
+    },
+    {
+        "item_name": "Ginebra San Miguel Kwatro Kantos",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Alfonso Brandy",
+        "price_per_item": "350.00"
+    },
+    {
+        "item_name": "The Bar Gin",
+        "price_per_item": "110.00"
+    },
+    {
+        "item_name": "Mineral Water 350ml",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Mineral Water 500ml",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Mineral Water 1L",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Mineral Water 6L (Wilkins)",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Ice Tube (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Rice 1kg",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Sinandomeng Rice 1kg",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Dinorado Rice 1kg",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Brown Sugar 1\/4kg",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "White Sugar 1\/4kg",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Salt (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Magic Sarap Sachet",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Ajinomoto Vetsin 10g",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Knorr Cubes Chicken",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Knorr Cubes Pork",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Knorr Cubes Beef",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Sinigang Mix Original",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Sinigang Mix Gabi",
+        "price_per_item": "22.00"
+    },
+    {
+        "item_name": "Pamana Fish Sauce (Patis)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Datu Puti Soy Sauce Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Datu Puti Vinegar Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Datu Puti Soy Sauce Bottle Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Datu Puti Vinegar Bottle Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Silver Swan Soy Sauce",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Mang Tomas All Around Sarsa",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "UFC Banana Ketchup Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "UFC Banana Ketchup Pouch",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Jufran Banana Ketchup",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Cooking Oil Takal (Small)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cooking Oil Bottle 250ml",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Gardenia White Bread",
+        "price_per_item": "70.00"
+    },
+    {
+        "item_name": "Gardenia Wheat Bread",
+        "price_per_item": "85.00"
+    },
+    {
+        "item_name": "Gardenia Chocolate Loaf",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Pinoy Tasty",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Monay (Pack)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Pandesal (Pack of 10)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Cheese Whiz Sachet",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Cheese Whiz Glass",
+        "price_per_item": "85.00"
+    },
+    {
+        "item_name": "Eden Cheese 165g",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Eden Cheese Small",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Magnolia Cheezee",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Dari Creme Margarine",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Star Margarine Small",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Lady's Choice Mayonnaise Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lady's Choice Mayonnaise Jar Small",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Best Foods Mayo Sachet",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Peanut Butter Jar Small",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Coco Jam Jar",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Magnolia All Purpose Cream",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Nestle All Purpose Cream",
+        "price_per_item": "65.00"
+    },
+    {
+        "item_name": "Carnation Evap",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Carnation Condensada",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Alaska Evaporated Milk",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Alaska Condensed Milk",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Angel Evaporada",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Angel Condensada",
+        "price_per_item": "38.00"
+    },
+    {
+        "item_name": "Fresh Egg (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Salted Egg (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Balut",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Penoy",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Biogesic (Tab)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Neozep (Tab)",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Bioflu (Tab)",
+        "price_per_item": "7.00"
+    },
+    {
+        "item_name": "Alaxan FR (Cap)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Medicol (Cap)",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Imodium (Cap)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Diatabs (Tab)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Kremil-S (Tab)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Solmux (Cap)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Tuseran (Cap)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Decolgen (Tab)",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Symdex (Tab)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Vitamin C Poten-Cee",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Vitamin C Ceelin",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Band-Aid Strips (pc)",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Betadine Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Alcohol Green Cross 70% 60ml",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Alcohol Casino 70% 60ml",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Cotton Balls Small",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Cotton Buds Pack",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Baby Wipes Pack",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Sanitary Napkin Modess Regular (pc)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Sanitary Napkin Whisper (pc)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Sanitary Napkin Sisters (pc)",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Panty Liner Carefree (Pack)",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Diaper EQ Small (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Diaper EQ Medium (pc)",
+        "price_per_item": "11.00"
+    },
+    {
+        "item_name": "Diaper EQ Large (pc)",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Diaper Pampers Small (pc)",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Tissue Roll (pc)",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Face Mask Disposable (pc)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Ballpen Panda Black",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Ballpen Panda Blue",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Ballpen HBW Black",
+        "price_per_item": "6.00"
+    },
+    {
+        "item_name": "Bond Paper Short (pc)",
+        "price_per_item": "1.00"
+    },
+    {
+        "item_name": "Bond Paper Long (pc)",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Manila Paper",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Cartolina White",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Correction Tape",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Yellow Pad (Pad)",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "1\/4 Sheet Pad Paper",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Notebook Spiral",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Pencil Mongol 2",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Sharpener Metal",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Eraser White",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Glue Elmer's Small",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Scissors Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Cutter Small",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Tape Transparent Small",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Tape Masking Small",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Battery AA Eveready (pair)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Battery AAA Eveready (pair)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Super Glue",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Mighty Bond",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Candle White #18 (pc)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Candle Espirna (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Matches Rizal (Box)",
+        "price_per_item": "3.00"
+    },
+    {
+        "item_name": "Load Card Globe 100",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Load Card Smart 100",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "Load Card TNT 100",
+        "price_per_item": "100.00"
+    },
+    {
+        "item_name": "SIM Card Globe",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "SIM Card Smart",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "SIM Card DITO",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "SIM Card TM",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "SIM Card TNT",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Plastic Bag Sando Tiny (pc)",
+        "price_per_item": "1.00"
+    },
+    {
+        "item_name": "Plastic Bag Sando Medium (pc)",
+        "price_per_item": "2.00"
+    },
+    {
+        "item_name": "Ice Candy Plastic (Pack)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Ice Bag Plastic (Pack)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Paper Plate (Pack of 10)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Plastic Cup (Pack of 10)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Plastic Spoon (Pack of 10)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Plastic Fork (Pack of 10)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Charcoal (Pack)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Garbage Bag Black Small (pc)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Garbage Bag Black Large (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Rags (Basahan)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Walist Tingting",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Walis Tambo",
+        "price_per_item": "150.00"
+    },
+    {
+        "item_name": "Dust Pan Plastic",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Laundry Bar Perla",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Clothes Clip (Pack)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Hanger Plastic (set of 3)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Safety Pin (set)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Needle and Thread Set",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Hair Tie (pc)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Hair Clip (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Comb Plastic",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Mirror Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Nail Cutter",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Eskinol Facial Cleanser Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Baby Powder Johnson's Small",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Baby Oil Small",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Petroleum Jelly Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Vicks Vaporub 10g",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "White Flower Oil Small",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Efficascent Oil Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Omega Pain Killer Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Salonpas Patch",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Katinko Ointment",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Manzanilla",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Aceite de Manzanilla",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Plemex (Capsule)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Carbocisteine Solmux (Cap)",
+        "price_per_item": "12.00"
+    },
+    {
+        "item_name": "Ambroxol (Tab)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Loperamide (Tab)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Bonamine (Tab)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Gaviscon Sachet",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Knorr Liquid Seasoning Small",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Maggi Savor Classic",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Maggi Savor Chilimansi",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Maggi Savor Calamansi",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Oyster Sauce Sachet",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Tomato Sauce Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Tomato Paste Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Spaghetti Sauce Sachet",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Cornstarch Small Pack",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Flour Small Pack",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Bread Crumbs Small",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Baking Powder Small",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Yeast Small",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Food Color Red",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Food Color Yellow",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Food Color Green",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Vanilla Extract Small",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Black Pepper Ground (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Paminta Buo (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Laurel Leaves (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Atsuete (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Chili Powder (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Curry Powder (Pack)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Ginataang Mix",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Kare-Kare Mix",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Caldereta Mix",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Menudo Mix",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Afritada Mix",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Breading Mix Crispy Fry Original",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Breading Mix Crispy Fry Spicy",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Breading Mix Crispy Fry Garlic",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Ajinobmoto Ginisa Mix",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Sopas Pasta 200g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Spaghetti Pasta 500g",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Macaroni Pasta 200g",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Bihon 250g",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Sotanghon 250g",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Misua Pack",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Gulaman Powder Red",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Gulaman Powder Green",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Sago Straw Small",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Kaong Jar Small",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Nata de Coco Jar Small",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Fruit Cocktail Can Small",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Pineapple Chunks Can Small",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Nestle Cream Small",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Graham Crackers Pack",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Crushed Grahams",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Macapuno Strings Jar",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Ube Halaya Jar",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Cheez Whiz Pimiento",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Liver Spread Reno",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Sandwich Spread Lady's Choice Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Chiz Whiz Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nutella Small Tub",
+        "price_per_item": "150.00"
+    },
+    {
+        "item_name": "Stick-O Chocolate 380g",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Superstix Chocolate",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Superstix Milk",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Hello Panda Chocolate",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Hello Panda Strawberry",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Yanyna Dip",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Pocky Chocolate",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Pocky Strawberry",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Kitkat 2F",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Kitkat 4F",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Snickers Bar",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Mars Bar",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Milky Way",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Twix",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "M&Ms Peanut Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "M&Ms Chocolate Small",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Kisses Small Pack",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Hershey's Bar Small",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Hershey's Almond",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Crunch Bar",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Kinder Joy",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Nutribar",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Fitbar Chocolate",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Fitbar Fruits",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Fitbar Nuts",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Quaker Oats Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Quaker Oats Chocolate Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Quaker Oats Banana Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Kellogg's Cornflakes Small Box",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Koko Krunch Small Box",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Honey Stars Small Box",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Fruity Pebbles Small",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Bear Brand Adult Plus Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Nido Fortigrow Sachet",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Milo 24g (Twin Pack)",
+        "price_per_item": "18.00"
+    },
+    {
+        "item_name": "Swiss Miss Chocolate Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Swiss Miss Marshmallow Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Lipton Tea Bag Yellow Label",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Green Tea Bag",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Chamomile Tea Bag",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Ginger Tea Instant Sachet",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Turmeric Tea Sachet",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Fresh Milk Magnolia 1L",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Low Fat Milk Magnolia 1L",
+        "price_per_item": "90.00"
+    },
+    {
+        "item_name": "Choco Milk Magnolia 1L",
+        "price_per_item": "95.00"
+    },
+    {
+        "item_name": "Soy Milk Vitamilk Bottle",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Soy Milk Vitamilk Box",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Almond Breeze Small",
+        "price_per_item": "45.00"
+    },
+    {
+        "item_name": "Sterilized Milk Bear Brand Can",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Yoghurt Drink Nestle",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Yoghurt Cup Nestle",
+        "price_per_item": "40.00"
+    },
+    {
+        "item_name": "Selecta Ice Cream Stick",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Cornetto Vanilla",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Cornetto Chocolate",
+        "price_per_item": "30.00"
+    },
+    {
+        "item_name": "Drumstick",
+        "price_per_item": "35.00"
+    },
+    {
+        "item_name": "Pinipig Crunch",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Twin Popsies",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Magnum Classic",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Magnum Almond",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Selecta 1.5L Double Dutch",
+        "price_per_item": "250.00"
+    },
+    {
+        "item_name": "Selecta 1.5L Cookies and Cream",
+        "price_per_item": "250.00"
+    },
+    {
+        "item_name": "Selecta 1.5L Chocolate",
+        "price_per_item": "220.00"
+    },
+    {
+        "item_name": "Magnolia 1.5L Ube",
+        "price_per_item": "220.00"
+    },
+    {
+        "item_name": "Magnolia 1.5L Mango",
+        "price_per_item": "220.00"
+    },
+    {
+        "item_name": "Cheese Ring",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Peewee Pizza",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Nutri-Star",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Lumpia Wrapper (Pack)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Siomai Wrapper (Pack)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Tocino Pack 250g",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Longganisa Pack 250g",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Hotdog Tender Juicy 250g",
+        "price_per_item": "55.00"
+    },
+    {
+        "item_name": "Hotdog Tender Juicy 1kg",
+        "price_per_item": "200.00"
+    },
+    {
+        "item_name": "Cheesedog Tender Juicy 250g",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Bacon Pack 200g",
+        "price_per_item": "120.00"
+    },
+    {
+        "item_name": "Ham Slices 250g",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Chicken Nuggets Pack",
+        "price_per_item": "120.00"
+    },
+    {
+        "item_name": "Siomai Pork (Pack)",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "Siomai Beef (Pack)",
+        "price_per_item": "80.00"
+    },
+    {
+        "item_name": "French Fries Frozen 1kg",
+        "price_per_item": "150.00"
+    },
+    {
+        "item_name": "Fishball Pack",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Kikiam Pack",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Squidball Pack",
+        "price_per_item": "60.00"
+    },
+    {
+        "item_name": "Oranges (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Apples (pc)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Banana Lakatan (pc)",
+        "price_per_item": "8.00"
+    },
+    {
+        "item_name": "Mango (pc)",
+        "price_per_item": "25.00"
+    },
+    {
+        "item_name": "Onion (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Garlic (Head)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Ginger (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Potato (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Carrot (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Cabbage (Whole)",
+        "price_per_item": "50.00"
+    },
+    {
+        "item_name": "Sayote (pc)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Eggplant (pc)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Tomato (pc)",
+        "price_per_item": "5.00"
+    },
+    {
+        "item_name": "Calamansi (Pack)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Sili Labuyo (Pack)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Ampalaya (pc)",
+        "price_per_item": "20.00"
+    },
+    {
+        "item_name": "Sitaw (Bundle)",
+        "price_per_item": "15.00"
+    },
+    {
+        "item_name": "Okra (Bundle)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Kang Kong (Bundle)",
+        "price_per_item": "10.00"
+    },
+    {
+        "item_name": "Malunggay (Bundle)",
+        "price_per_item": "5.00"
+    }
+]
