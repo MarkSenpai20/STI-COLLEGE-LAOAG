@@ -1,19 +1,31 @@
 <?php
+session_start();
 date_default_timezone_set('Asia/Manila'); 
 
+// --- DYNAMIC DATABASE CONNECTION ---
+// 1. If Teacher is logged in, use their credentials
+if (isset($_SESSION['db_user']) && isset($_SESSION['db_pass'])) {
+    $user = $_SESSION['db_user'];
+    $pass = $_SESSION['db_pass'];
+} else {
+    // 2. Fallback for STUDENTS (Public Access)
+    // Students don't log in via the admin form, but they need to insert data.
+    // We use a default connection for them. 
+    // You can change this to a restricted user if you want higher security.
+    $user = "teacher"; 
+    $pass = "sti123"; 
+}
+
 $host = "127.0.0.1";
-$user = "teacher"; 
-$pass = "sti123"; 
 $dbname = "school_db";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-     die("Database Error: " . $conn->connect_error);
-}
+// Attempt Connection
+// We suppress errors (@) so we can handle them cleanly in the Login action
+$conn = @new mysqli($host, $user, $pass, $dbname);
 
 $stateFile = 'server_state.json';
 
+// --- HELPER FUNCTIONS ---
 function getServerIP() {
     return gethostbyname(gethostname());
 }
@@ -30,13 +42,47 @@ function getServerState() {
     return json_decode(file_get_contents($stateFile), true);
 }
 
-// --- API HANDLING ---
+// --- API ACTIONS ---
 if (isset($_GET['action'])) {
+    // Don't output JSON header for export actions
     if ($_GET['action'] !== 'export') {
         header('Content-Type: application/json');
     }
     
     $action = $_GET['action'];
+
+    // 0. LOGIN ACTION (Teacher)
+    if ($action == 'login' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+        $inputUser = $_POST['username'];
+        $inputPass = $_POST['password'];
+
+        // Test connection with provided credentials
+        $testConn = @new mysqli($host, $inputUser, $inputPass, $dbname);
+
+        if ($testConn->connect_error) {
+            echo json_encode(["status" => "error", "message" => "Login Failed: " . $testConn->connect_error]);
+        } else {
+            // Success! Save to session
+            $_SESSION['db_user'] = $inputUser;
+            $_SESSION['db_pass'] = $inputPass;
+            $_SESSION['logged_in'] = true;
+            echo json_encode(["status" => "success"]);
+        }
+        exit;
+    }
+
+    // 0.5 LOGOUT ACTION
+    if ($action == 'logout') {
+        session_destroy();
+        echo json_encode(["status" => "success"]);
+        exit;
+    }
+
+    // CHECK CONNECTION BEFORE CONTINUING
+    // If connection failed (and it's not a login attempt), stop here.
+    if ($conn->connect_error) {
+         die(json_encode(["status" => "error", "message" => "Database Connection Failed. Please Log In."]));
+    }
 
     // 1. SET MODE
     if ($action == 'set_mode') {
@@ -163,27 +209,22 @@ if (isset($_GET['action'])) {
         exit;
     }
 
-    // 8. EXPORT CSV (UPDATED LOGIC)
+    // 8. EXPORT CSV
     if ($action == 'export') {
         $class = $_GET['class'];
-        $type = $_GET['type'] ?? ''; // 'registered' or 'attendance'
-        $date = $_GET['date'] ?? date('Y-m-d'); // Default to today
+        $type = $_GET['type'] ?? ''; 
+        $date = $_GET['date'] ?? date('Y-m-d');
         
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="Export_' . $class . '_' . $date . '.csv"');
         
         $output = fopen('php://output', 'w');
 
-        // LOGIC: If type 'registered', we dump STUDENTS table.
-        // Otherwise, we dump ATTENDANCE_LOGS table.
-        
         if ($type == 'registered') {
-             // Export Class Identity List
              fputcsv($output, ['Student Name', 'Student ID', 'Status']);
              $res = $conn->query("SELECT student_name, student_id FROM students WHERE class_name = '$class'");
              while($row = $res->fetch_assoc()) fputcsv($output, [$row['student_name'], $row['student_id'], 'Registered Identity']);
         } else {
-             // Export Daily Log (Attendance)
              fputcsv($output, ['Student Name', 'Student ID', 'Time In']);
              $res = $conn->query("SELECT student_name, student_id, timestamp FROM attendance_logs WHERE class_name = '$class' AND session_date = '$date'");
              while($row = $res->fetch_assoc()) fputcsv($output, [$row['student_name'], $row['student_id'], $row['timestamp']]);
