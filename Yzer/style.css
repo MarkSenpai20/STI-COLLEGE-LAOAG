@@ -1,0 +1,78 @@
+/* General settings for the whole page */
+body {
+    font-family: Arial, sans-serif; /* Clean font */
+    background-color: #f0f2f5;      /* Light gray background */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;        /* Center everything */
+}
+
+/* The White Box Card */
+.container {
+    background: white;
+    width: 100%;
+    max-width: 500px;  /* Not too wide */
+    padding: 25px;
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+h2 { text-align: center; color: #333; }
+
+/* Input boxes and Buttons */
+input[type="text"], button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+}
+
+/* Main Save Button (Blue) */
+button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+button:hover { opacity: 0.9; }
+
+/* Update Button (Orange) */
+.btn-update { background-color: #ff9f43; }
+
+/* Add Button Link (Green) */
+.btn-add {
+    background-color: #2ed573;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Edit Icon */
+.btn-edit { text-decoration: none; margin-right: 10px; font-size: 1.2rem; }
+
+/* Delete Button (Red X) */
+.btn-delete {
+    background-color: #ff4757;
+    color: white;
+    padding: 5px 10px;
+    width: auto;
+    border-radius: 4px;
+}
+
+/* Cancel Link */
+.link-cancel { text-decoration: none; color: #007bff; }
+
+/* Table Design */
+table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+td, th { padding: 10px; border-bottom: 1px solid #eee; text-align: left; }
+
+/* RESPONSIVE: If screen is small (Phone), shrink text */
+@media (max-width: 400px) {
+    h2 { font-size: 20px; }
+    td, th { font-size: 14px; padding: 8px; }
+}
