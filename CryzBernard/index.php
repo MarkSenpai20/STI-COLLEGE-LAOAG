@@ -1,20 +1,10 @@
-<?php
-/**
- * Single File PHP Student Enrollment System (CRUD)
- * Created for: Mark Llanes Cruz
- * * Instructions:
- * 1. Place this file in your XAMPP htdocs folder.
- * 2. Ensure MySQL is running in XAMPP.
- * 3. Access via localhost in your browser.
- */
-
-// --- DATABASE CONFIGURATION ---
+<?php 
 $servername = "localhost";
-$username = "root";     // Default XAMPP username
-$password = "";         // Default XAMPP password
+$username = "root";     
+$password = "";         
 $dbname = "enrollment_db";
 
-// 1. CONNECT TO SERVER & CREATE DATABASE IF NOT EXISTS
+// CONNECT SERVER & CREATE DATABASE IF NOT EXISTS
 $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -26,10 +16,9 @@ if (!$conn->query($sql)) {
     die("Error creating database: " . $conn->error);
 }
 
-// Select the database
 $conn->select_db($dbname);
 
-// 2. CREATE TABLE IF NOT EXISTS
+// CREATE TABLE IF NOT EXISTS
 $tableSql = "CREATE TABLE IF NOT EXISTS students (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -42,7 +31,7 @@ if (!$conn->query($tableSql)) {
     die("Error creating table: " . $conn->error);
 }
 
-// --- HANDLE FORM SUBMISSIONS (CRUD LOGIC) ---
+//               CRUD LOGIC
 $edit_mode = false;
 $update_id = 0;
 $edit_name = "";
@@ -51,7 +40,7 @@ $edit_phone = "";
 $edit_course = "";
 $message = "";
 
-// INSERT (Create)
+// INSERT
 if (isset($_POST['save'])) {
     $name = $_POST['full_name'];
     $email = $_POST['email'];
@@ -122,83 +111,236 @@ if (isset($_POST['update'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Enrollment System</title>
-    <!-- Using Tailwind CSS via CDN for easy responsive styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom scrollbar for table container */
-        .table-container::-webkit-scrollbar {
-            height: 8px;
+      
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
         }
-        .table-container::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
+
+        /*   NAVBAR   */
+        .navbar {
+            background-color: #2563eb; 
+            padding: 15px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            color: white;
+        }
+        .navbar h1 { margin: 0; font-size: 1.5rem; }
+        .navbar p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8; }
+
+        /*   LAYOUT CONTAINER   */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap; 
+            align-items: flex-start; 
+        }
+
+        /* Columns */
+        .col-form {
+            flex: 1;
+            min-width: 300px; 
+        }
+        .col-table {
+            flex: 2; 
+            min-width: 300px;
+        }
+
+        /* CARDS (White Boxes)   */
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden; 
+            margin-bottom: 20px;
+        }
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            background-color: #f8fafc;
+        }
+        .card-header h2 { margin: 0; font-size: 1.25rem; color: #444; }
+        .card-body { padding: 20px; }
+
+        /*  FORMS   */
+        .form-group { margin-bottom: 15px; }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 4px;
+            box-sizing: border-box; 
+            font-size: 1rem;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /*   BUTTONS   */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        .btn-green { background-color: #10b981; }
+        .btn-green:hover { background-color: #059669; }
+        
+        .btn-blue { background-color: #2563eb; }
+        .btn-blue:hover { background-color: #1d4ed8; }
+
+        .btn-gray { background-color: #6b7280; }
+        .btn-gray:hover { background-color: #4b5563; }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            width: auto;
+            margin-right: 5px;
+        }
+        .btn-yellow { background-color: #f59e0b; color: white; }
+        .btn-red { background-color: #ef4444; color: white; }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /*   TABLE   */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+        tr:last-child td { border-bottom: none; }
+        
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        /*  ALERTS   */
+        .alert {
+            background-color: #d1fae5;
+            border-left: 4px solid #10b981;
+            color: #065f46;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        /*   RESPONSIVE   */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; 
+            }
+            .col-form, .col-table {
+                width: 100%; 
+            }
+            .table-wrapper {
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body>
 
     <!-- Navbar -->
-    <nav class="bg-blue-600 p-4 shadow-lg">
-        <div class="container mx-auto">
-            <h1 class="text-white text-2xl font-bold">Enrollment System</h1>
-            <p class="text-blue-200 text-sm">Admin: Cryz Bernard Gonzales</p>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1>Enrollment System</h1>
+            <p>Admin: Cryz Bernard Gonzales</p>
         </div>
     </nav>
 
-    <div class="container mx-auto p-4 md:p-8">
+    <div class="container">
         
-        <!-- Status Message -->
+        <!-- Status Message (Full Width) -->
         <?php if ($message): ?>
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
-                <p><?php echo $message; ?></p>
+            <div style="width: 100%;">
+                <div class="alert" role="alert">
+                    <p><?php echo $message; ?></p>
+                </div>
             </div>
         <?php endif; ?>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- FORM SECTION (Left Side on Desktop) -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
-                    <h2 class="text-xl font-bold mb-4 text-gray-800 border-b pb-2">
-                        <?php echo $edit_mode ? 'Update Student' : 'Enroll New Student'; ?>
-                    </h2>
-                    
+        <!-- LEFT COLUMN: FORM -->
+        <div class="col-form">
+            <div class="card">
+                <div class="card-header">
+                    <h2><?php echo $edit_mode ? 'Update Student' : 'Enroll New Student'; ?></h2>
+                </div>
+                <div class="card-body">
                     <form action="index.php" method="POST">
                         <input type="hidden" name="id" value="<?php echo $update_id; ?>">
                         
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="full_name">
-                                Full Name
-                            </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
-                                id="full_name" type="text" name="full_name" required 
+                        <div class="form-group">
+                            <label for="full_name">Full Name</label>
+                            <input type="text" id="full_name" name="full_name" required 
                                 value="<?php echo $edit_name; ?>" placeholder="e.g. John Doe">
                         </div>
 
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                                Email Address
-                            </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
-                                id="email" type="email" name="email" required 
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required 
                                 value="<?php echo $edit_email; ?>" placeholder="john@example.com">
                         </div>
 
-                        <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-                                Phone Number
-                            </label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500" 
-                                id="phone" type="text" name="phone" required 
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" id="phone" name="phone" required 
                                 value="<?php echo $edit_phone; ?>" placeholder="0912 345 6789">
                         </div>
 
-                        <div class="mb-6">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="course">
-                                Course
-                            </label>
-                            <select class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                                id="course" name="course">
+                        <div class="form-group">
+                            <label for="course">Course</label>
+                            <select id="course" name="course">
                                 <option value="Computer Science" <?php if($edit_course == 'Computer Science') echo 'selected'; ?>>Computer Science</option>
                                 <option value="Information Technology" <?php if($edit_course == 'Information Technology') echo 'selected'; ?>>Information Technology</option>
                                 <option value="Engineering" <?php if($edit_course == 'Engineering') echo 'selected'; ?>>Engineering</option>
@@ -207,112 +349,83 @@ if (isset($_POST['update'])) {
                             </select>
                         </div>
 
-                        <div class="flex items-center justify-between">
+                        <div class="form-actions">
                             <?php if ($edit_mode): ?>
-                                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mr-2" 
-                                    type="submit" name="update">
-                                    Update
-                                </button>
-                                <a href="index.php" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center">
-                                    Cancel
-                                </a>
+                                <button class="btn btn-blue" type="submit" name="update">Update</button>
+                                <a href="index.php" class="btn btn-gray">Cancel</a>
                             <?php else: ?>
-                                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" 
-                                    type="submit" name="save">
-                                    Enroll Student
-                                </button>
+                                <button class="btn btn-green" type="submit" name="save">Enroll Student</button>
                             <?php endif; ?>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <!-- TABLE SECTION (Right Side on Desktop) -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200">
-                        <h2 class="text-xl font-bold text-gray-800">Enrolled Students</h2>
-                    </div>
-                    
-                    <div class="overflow-x-auto table-container">
-                        <table class="min-w-full leading-normal">
-                            <thead>
-                                <tr>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        ID
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Name
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Contact
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Course
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $result = $conn->query("SELECT * FROM students ORDER BY id DESC");
-                                if ($result->num_rows > 0):
-                                    while($row = $result->fetch_assoc()):
-                                ?>
-                                <tr>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap">#<?php echo $row['id']; ?></p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap font-semibold"><?php echo $row['full_name']; ?></p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p class="text-gray-900 whitespace-no-wrap"><?php echo $row['email']; ?></p>
-                                        <p class="text-gray-600 text-xs"><?php echo $row['phone']; ?></p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <span class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight">
-                                            <span aria-hidden class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
-                                            <span class="relative"><?php echo $row['course']; ?></span>
-                                        </span>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                        <div class="flex justify-center space-x-2">
-                                            <a href="index.php?edit=<?php echo $row['id']; ?>" 
-                                               class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded text-xs">
-                                                Edit
-                                            </a>
-                                            <a href="index.php?delete=<?php echo $row['id']; ?>" 
-                                               onclick="return confirm('Are you sure you want to delete this student?');" 
-                                               class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded text-xs">
-                                                Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php 
-                                    endwhile;
-                                else:
-                                ?>
-                                <tr>
-                                    <td colspan="5" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center text-gray-500">
-                                        No students enrolled yet.
-                                    </td>
-                                </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- RIGHT COLUMN: TABLE -->
+        <div class="col-table">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Enrolled Students</h2>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th> 
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Course</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $result = $conn->query("SELECT * FROM students ORDER BY id ASC");
+                            if ($result->num_rows > 0):
+                                $count = 1; 
+                                while($row = $result->fetch_assoc()):
+                            ?>
+                            <tr>
+                                <td>#<?php echo $count++; ?></td>
+                                <td>
+                                    <strong><?php echo $row['full_name']; ?></strong>
+                                </td>
+                                <td>
+                                    <?php echo $row['email']; ?><br>
+                                    <small style="color: #666;"><?php echo $row['phone']; ?></small>
+                                </td>
+                                <td>
+                                    <span class="badge"><?php echo $row['course']; ?></span>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-sm btn-yellow">Edit</a>
+                                    <a href="index.php?delete=<?php echo $row['id']; ?>" 
+                                       onclick="return confirm('Are you sure you want to delete this student?');" 
+                                       class="btn btn-sm btn-red">Delete</a>
+                                </td>
+                            </tr>
+                            <?php 
+                                endwhile;
+                            else:
+                            ?>
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding: 20px; color: #888;">
+                                    No students enrolled yet.
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        
-        <footer class="mt-12 text-center text-gray-500 text-sm pb-4">
-            <!-- &copy; <?php echo date("Y"); ?> Student Enrollment System. Developed by Cryz Bernard Gonzales. -->
-        </footer>
+
     </div>
+    
+    <footer style="text-align: center; padding: 20px; font-size: 0.8rem; color: #888;">
+    </footer>
 
 </body>
 </html>

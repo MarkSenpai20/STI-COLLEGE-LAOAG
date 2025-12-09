@@ -1,12 +1,11 @@
 <?php
-// --- CONFIGURATION & DATABASE CONNECTION ---
 $host = "localhost";
 $user = "root";
 $pass = "";
 $dbname = "transitionizer_db";
 $uploadDir = "uploads/";
 
-// Create connection
+
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -17,13 +16,13 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
 
-// --- CRUD OPERATIONS ---
 
-// 1. CREATE (Upload Image)
+
+// Upload Image
 if (isset($_POST['upload'])) {
     $title = $conn->real_escape_string($_POST['title']);
     $fileName = basename($_FILES["image"]["name"]);
-    $targetFilePath = $uploadDir . time() . "_" . $fileName; // Add timestamp to prevent overwrites
+    $targetFilePath = $uploadDir . time() . "_" . $fileName; 
     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
@@ -57,12 +56,12 @@ if (isset($_GET['delete'])) {
             unlink($filePath); // Delete physical file
         }
         $conn->query("DELETE FROM images WHERE id = $id"); // Delete DB record
-        header("Location: index.php"); // Refresh to clear URL parameters
+        header("Location: index.php"); // Refresh clear URL parameters
         exit();
     }
 }
 
-// 3. UPDATE (Edit Title)
+// UPDATE Edit Title
 if (isset($_POST['update'])) {
     $id = intval($_POST['id']);
     $title = $conn->real_escape_string($_POST['title']);
@@ -71,7 +70,7 @@ if (isset($_POST['update'])) {
     $msg_type = "success";
 }
 
-// 4. READ (Fetch all images)
+// READ Fetch all images
 $result = $conn->query("SELECT * FROM images ORDER BY id DESC");
 $images = [];
 while ($row = $result->fetch_assoc()) {
@@ -85,15 +84,133 @@ while ($row = $result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Transitionizer CRUD</title>
-    <!-- Using Tailwind CSS for instant responsiveness without external CSS files -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom Styles for Transitions */
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Center content max-width */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            margin-bottom: 25px;
+        }
+
+        .card-header {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /*   FORMS & INPUTS   */
+        input[type="text"], input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%; 
+            box-sizing: border-box; 
+            margin-bottom: 10px;
+        }
+
+        
+        .form-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .form-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /*   BUTTONS   */
+        button, .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-primary:hover { background-color: #0056b3; }
+
+        .btn-update { background-color: #ffc107; color: #333; }
+        .btn-update:hover { background-color: #e0a800; }
+
+        .btn-delete { background-color: #dc3545; color: white; }
+        .btn-delete:hover { background-color: #c82333; }
+
+        /*   ALERTS   */
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+        }
+        .alert-success { background-color: #28a745; }
+        .alert-error { background-color: #dc3545; }
+
+        /*   TABLE STYLES  */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+        .img-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        
+        .inline-form {
+            display: flex;
+            gap: 5px;
+        }
+
+     
         .slider-container {
             position: relative;
-            height: 400px; /* Adjustable height */
+            height: 400px;
             overflow: hidden;
             background-color: #000;
+            border-radius: 4px;
         }
         .slide {
             position: absolute;
@@ -105,9 +222,7 @@ while ($row = $result->fetch_assoc()) {
             justify-content: center;
             align-items: center;
         }
-        .slide.active {
-            opacity: 1;
-        }
+        .slide.active { opacity: 1; }
         .slide img {
             max-width: 100%;
             max-height: 100%;
@@ -122,23 +237,48 @@ while ($row = $result->fetch_assoc()) {
             border-radius: 5px;
             font-size: 1.2rem;
         }
+        .empty-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #ccc;
+        }
+
+        /* RESPONSIVE*/
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+            .slider-container {
+                height: 250px;
+            }
+            th, td {
+                padding: 8px 4px;
+                font-size: 0.9rem;
+            }
+            .btn {
+                width: 100%;
+                margin-top: 2px;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<body>
 
-    <div class="container mx-auto px-4 py-8">
+    <div class="container">
         
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Picture Transitionizer (CRUD)</h1>
+        <h1>Picture Transitionizer (CRUD)</h1>
 
         <!-- MESSAGES -->
         <?php if (isset($msg)): ?>
-            <div class="p-4 mb-4 text-white rounded <?php echo $msg_type == 'success' ? 'bg-green-500' : 'bg-red-500'; ?>">
+            <div class="alert <?php echo $msg_type == 'success' ? 'alert-success' : 'alert-error'; ?>">
                 <?php echo $msg; ?>
             </div>
         <?php endif; ?>
 
-        <!-- SECTION 1: THE SLIDESHOW (READ) -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+        <!-- SLIDESHOW -->
+        <div class="card">
             <div class="slider-container" id="slider">
                 <?php if (count($images) > 0): ?>
                     <?php foreach ($images as $index => $img): ?>
@@ -148,55 +288,59 @@ while ($row = $result->fetch_assoc()) {
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <div class="flex items-center justify-center h-full text-white">
+                    <div class="empty-slide">
                         <p>No images uploaded yet. Use the form below.</p>
                     </div>
                 <?php endif; ?>
             </div>
         </div>
 
-        <!-- SECTION 2: CREATE FORM -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h2 class="text-xl font-bold mb-4">Add New Picture</h2>
-            <form action="" method="POST" enctype="multipart/form-data" class="flex flex-col md:flex-row gap-4">
-                <input type="text" name="title" placeholder="Image Title" required class="border p-2 rounded w-full md:w-1/3">
-                <input type="file" name="image" required class="border p-2 rounded w-full md:w-1/3">
-                <button type="submit" name="upload" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full md:w-1/3">
-                    Upload & Add to Slide
-                </button>
+        <!--FORM -->
+        <div class="card">
+            <div class="card-header">Add New Picture</div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-input">
+                        <input type="text" name="title" placeholder="Image Title" required>
+                    </div>
+                    <div class="form-input">
+                        <input type="file" name="image" required>
+                    </div>
+                    <div class="form-input" style="flex: 0 0 auto;">
+                        <button type="submit" name="upload" class="btn btn-primary">Upload & Add</button>
+                    </div>
+                </div>
             </form>
         </div>
 
-        <!-- SECTION 3: MANAGE IMAGES (UPDATE & DELETE) -->
-        <div class="bg-white rounded-lg shadow-lg p-6">
-            <h2 class="text-xl font-bold mb-4">Manage Gallery</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full table-auto">
+        <!-- MANAGE IMAGES (UPDATE & DELETE) -->
+        <div class="card">
+            <div class="card-header">Manage Gallery</div>
+            <div style="overflow-x: auto;">
+                <table>
                     <thead>
-                        <tr class="bg-gray-200">
-                            <th class="px-4 py-2 text-left">Preview</th>
-                            <th class="px-4 py-2 text-left">Title (Edit to Update)</th>
-                            <th class="px-4 py-2 text-left">Actions</th>
+                        <tr>
+                            <th>Preview</th>
+                            <th>Title (Edit to Update)</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($images as $img): ?>
-                        <tr class="border-b">
-                            <td class="px-4 py-2">
-                                <img src="<?php echo $uploadDir . $img['filename']; ?>" class="h-16 w-16 object-cover rounded">
+                        <tr>
+                            <td>
+                                <img src="<?php echo $uploadDir . $img['filename']; ?>" class="img-thumbnail">
                             </td>
-                            <td class="px-4 py-2">
+                            <td>
                                 <!-- UPDATE FORM INLINE -->
-                                <form action="" method="POST" class="flex items-center gap-2">
+                                <form action="" method="POST" class="inline-form">
                                     <input type="hidden" name="id" value="<?php echo $img['id']; ?>">
-                                    <input type="text" name="title" value="<?php echo htmlspecialchars($img['title']); ?>" class="border p-1 rounded">
-                                    <button type="submit" name="update" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-2 rounded">
-                                        Update
-                                    </button>
+                                    <input type="text" name="title" value="<?php echo htmlspecialchars($img['title']); ?>" style="margin-bottom:0;">
+                                    <button type="submit" name="update" class="btn btn-update">Update</button>
                                 </form>
                             </td>
-                            <td class="px-4 py-2">
-                                <a href="?delete=<?php echo $img['id']; ?>" onclick="return confirm('Are you sure you want to delete this image?');" class="text-sm bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded">
+                            <td>
+                                <a href="?delete=<?php echo $img['id']; ?>" onclick="return confirm('Are you sure you want to delete this image?');" class="btn btn-delete">
                                     Delete
                                 </a>
                             </td>
@@ -209,7 +353,7 @@ while ($row = $result->fetch_assoc()) {
 
     </div>
 
-    <!-- JAVASCRIPT FOR TRANSITIONS -->
+    <!-- TRANSITIONS -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
